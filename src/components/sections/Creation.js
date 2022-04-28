@@ -65,7 +65,7 @@ const Creation = () => {
             <TextField fullWidth style={{paddingBottom: '3vh'}} value={name} onChange={(e)=>{setName(e.target.value)}} label="Project Name" variant="outlined" color="secondary"/>
             <TextField fullWidth style={{paddingBottom: '3vh'}} value={token} onChange={(e)=>{setToken(e.target.value)}} label="Bot Token" variant="outlined" color="warning" type="password"/>
             <Button onClick={()=>{
-                 axios.post('http://137.184.143.181:3000/birth', {botToken: token, projectName: name, username: "yinftw"})
+                 axios.post('https://discmaker.yinftw.com/birth', {botToken: token, projectName: name, username: "yinftw"})
                      .then(() => {
                          let projName=name
                          handleSuccess(projName)
