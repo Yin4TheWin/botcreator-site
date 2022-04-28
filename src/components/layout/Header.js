@@ -115,7 +115,7 @@ const Header = ({
                       <Link to="/" onClick={closeMenu}>Home</Link>
                     </li>
                     <li>
-                      <a href="/dashboard" className="button button-primary button-wide-mobile button-sm">Get Started</a>
+                      <a href="#/dashboard" className="button button-primary button-wide-mobile button-sm">Get Started</a>
                     </li>
                   </ul>
                 </div>

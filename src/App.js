@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from 'react';
-import { useLocation, Switch } from 'react-router-dom';
+import { useLocation, Switch, HashRouter } from 'react-router-dom';
 import AppRoute from './utils/AppRoute';
 import ScrollReveal from './utils/ScrollReveal';
 
@@ -26,13 +26,15 @@ const App = () => {
 
   return (
     <ScrollReveal
-      ref={childRef}
-      children={() => (
-        <Switch>
-          <AppRoute exact path="/" component={Home} layout={LayoutDefault} />
-          <AppRoute exact path="/dashboard" component={Dashboard} layout={LayoutDefault} />
-        </Switch>
-      )} />
+    ref={childRef}
+    children={() => (
+      <HashRouter>
+      <Switch>
+        <AppRoute exact path="/dashboard" component={Dashboard} layout={LayoutDefault} />
+        <AppRoute exact path="/" component={Home} layout={LayoutDefault} />
+      </Switch>
+      </HashRouter>
+    )} />
   );
 }
 
