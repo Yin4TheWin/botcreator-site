@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/botcreator-site/static/css/main.04126690.css",
-    "main.js": "/botcreator-site/static/js/main.fc62b5fa.js",
+    "main.js": "/botcreator-site/static/js/main.08127db2.js",
     "static/media/features-split-image-03.png": "/botcreator-site/static/media/features-split-image-03.b817f6457be2c287cfbf.png",
     "static/media/video-placeholder.jpg": "/botcreator-site/static/media/video-placeholder.ca40af5667c998a65125.jpg",
     "static/media/features-split-image-02.png": "/botcreator-site/static/media/features-split-image-02.17bd6b99561560ecdc1d.png",
@@ -18,10 +18,10 @@
     "static/media/feature-tile-icon-01.svg": "/botcreator-site/static/media/feature-tile-icon-01.e13cef8e30c0472fc8b303cc0801113f.svg",
     "static/media/feature-tile-icon-02.svg": "/botcreator-site/static/media/feature-tile-icon-02.469356592c7ce3b1abf53cca85e82fee.svg",
     "main.04126690.css.map": "/botcreator-site/static/css/main.04126690.css.map",
-    "main.fc62b5fa.js.map": "/botcreator-site/static/js/main.fc62b5fa.js.map"
+    "main.08127db2.js.map": "/botcreator-site/static/js/main.08127db2.js.map"
   },
   "entrypoints": [
     "static/css/main.04126690.css",
-    "static/js/main.fc62b5fa.js"
+    "static/js/main.08127db2.js"
   ]
 }
