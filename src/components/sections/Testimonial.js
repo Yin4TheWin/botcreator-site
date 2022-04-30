@@ -45,7 +45,7 @@ const Testimonial = ({
 
   const sectionHeader = {
     title: 'Testimonials',
-    paragraph: '(Product name) is made with ❤️ by a trusted and experienced Discord Bot developer. You can check out my fiverr page and reviews here, or keep scrolling to see satisfied customer testimonials.'
+    paragraph: 'Bot Ink is made with ❤️ by a trusted and experienced Discord Bot developer. You can check out my fiverr page and reviews here, or keep scrolling to see satisfied customer testimonials.'
   };
 
   return (
