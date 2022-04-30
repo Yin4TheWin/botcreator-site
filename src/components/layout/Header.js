@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
 import Logo from './partials/Logo';
+import { HashLink } from 'react-router-hash-link';
 
 const propTypes = {
   navPosition: PropTypes.string,
@@ -113,6 +114,9 @@ const Header = ({
                     )}>
                     <li>
                       <Link to="/" onClick={closeMenu}>Home</Link>
+                    </li>
+                    <li>
+                      <HashLink to="/#features" onClick={closeMenu}>Features</HashLink>
                     </li>
                     <li>
                       <a href="#/dashboard" className="button button-primary button-wide-mobile button-sm">Get Started</a>
