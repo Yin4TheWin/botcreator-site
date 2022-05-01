@@ -28,7 +28,7 @@ const Login = () => {
             <p>{login==0 ? "Welcome back! Inky's excited to see you again. What shall you make today?" : "Inky welcomes you warmly. Your server's future starts here!"}</p>
             <p onClick={()=>{
                 setLogin(login==0?1:0)
-                setLoginText(loginText.includes("Log in")?"Don't have an account? Sign Up":"Already have an account? Log In")
+                setLoginText(loginText.includes("Log In")?"Don't have an account? Sign Up":"Already have an account? Log In")
             }} style={{marginBottom: '2vh', color: 'blue', textDecorationLine: 'underline'}}>{loginText}</p>
             <TextField fullWidth style={{marginBottom: '3vh', backgroundColor: '#d1d1d1', borderRadius: '5px'}} value={email} onChange={(e)=>{setEmail(e.target.value)}} label="Email" variant="outlined" color="secondary"/>
             <TextField fullWidth style={{marginBottom: '3vh', backgroundColor: '#d1d1d1', borderRadius: '5px'}} value={pwd} onChange={(e)=>{setPwd(e.target.value)}} label="Password" variant="outlined" color="warning" type="password"/>
