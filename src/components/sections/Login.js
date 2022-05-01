@@ -5,6 +5,7 @@ import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, se
 import { firebase } from '../../firebase';
 import { getDatabase, ref, set } from "firebase/database";
 import Image from '../elements/Image'
+import {isMobile} from 'react-device-detect';
 
 const auth = getAuth(firebase)
 const db = getDatabase(firebase)
@@ -15,9 +16,10 @@ const Login = () => {
     const [email, setEmail] = React.useState("")
     const [pwd, setPwd] = React.useState("")
     const [confirmPwd, setConfirmPwd] = React.useState("")
+    const [width, setWidth] = React.useState(isMobile?'75vw':'50vw')
 
     return (
-        <div style={{display: 'flex',  justifyContent:'center', flexDirection: 'column', alignItems:'center', height: 'auto', width: '50vw', borderRadius: '15px', paddingLeft: '3vw', paddingRight: '3vw'}}>
+        <div style={{display: 'flex',  justifyContent:'center', flexDirection: 'column', alignItems:'center', height: 'auto', width: width, borderRadius: '15px', paddingLeft: '3vw', paddingRight: '3vw'}}>
             <Image
             className="has-shadow"
             src={login==0?require('./../../assets/images/login.png'):require('./../../assets/images/signup.png')}
