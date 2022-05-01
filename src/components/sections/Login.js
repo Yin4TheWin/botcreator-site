@@ -1,7 +1,7 @@
 import React from 'react';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendPasswordResetEmail } from "firebase/auth";
 import { firebase } from '../../firebase';
 import { getDatabase, ref, set } from "firebase/database";
 
@@ -24,7 +24,15 @@ const Login = () => {
             }} style={{marginBottom: '2vh', color: 'blue', textDecorationLine: 'underline'}}>{loginText}</p>
             <TextField fullWidth style={{paddingBottom: '3vh'}} value={email} onChange={(e)=>{setEmail(e.target.value)}} label="Email" variant="outlined" color="secondary"/>
             <TextField fullWidth style={{paddingBottom: '3vh'}} value={pwd} onChange={(e)=>{setPwd(e.target.value)}} label="Password" variant="outlined" color="warning" type="password"/>
-            {login==0?<p></p>:<TextField fullWidth style={{paddingBottom: '3vh'}} value={confirmPwd} onChange={(e)=>{setConfirmPwd(e.target.value)}} label="Confirm Password" variant="outlined" color="warning" type="password"/>}
+            {login==0 ? 
+                <p onClick={()=>{
+                    if(email!=="")
+                        sendPasswordResetEmail(auth, email).then(()=>{ alert("Password reset email has been sent to "+email) }).catch(()=>{ alert("It seems we do not have your email on file.") })
+                    else
+                        alert("Please enter your email in the email field!")
+                }} style={{marginBottom: '2vh', color: 'blue', textDecorationLine: 'underline'}}>Forgot Password?</p>:
+                <TextField fullWidth style={{paddingBottom: '3vh'}} value={confirmPwd} onChange={(e)=>{setConfirmPwd(e.target.value)}} label="Confirm Password" variant="outlined" color="warning" type="password"/>
+            }
             <Button onClick={()=>{
                 if(login==0){
                     signInWithEmailAndPassword(auth, email, pwd).catch(err=>{
