@@ -4,26 +4,34 @@ import Button from '@mui/material/Button';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendPasswordResetEmail } from "firebase/auth";
 import { firebase } from '../../firebase';
 import { getDatabase, ref, set } from "firebase/database";
+import Image from '../elements/Image'
 
 const auth = getAuth(firebase)
 const db = getDatabase(firebase)
-
+ 
 const Login = () => {
     const [login, setLogin] = React.useState(0) //0: Log in, 1: Sign up
-    const [loginText, setLoginText] = React.useState("Don't have an account? Sign up here")
+    const [loginText, setLoginText] = React.useState("Don't have an account? Sign Up")
     const [email, setEmail] = React.useState("")
     const [pwd, setPwd] = React.useState("")
     const [confirmPwd, setConfirmPwd] = React.useState("")
 
     return (
-        <div style={{display: 'flex',  justifyContent:'center', flexDirection: 'column', alignItems:'center', height: 'auto', width: 'auto', borderRadius: '15px', backgroundColor: '#498387', paddingLeft: '3vw', paddingRight: '3vw'}}>
+        <div style={{display: 'flex',  justifyContent:'center', flexDirection: 'column', alignItems:'center', height: 'auto', width: '50vw', borderRadius: '15px', paddingLeft: '3vw', paddingRight: '3vw'}}>
+            <Image
+            className="has-shadow"
+            src={login==0?require('./../../assets/images/login.png'):require('./../../assets/images/signup.png')}
+            alt="Hero"
+            width={128}
+            height={128} /> 
             <h1> {login==0?"Log In":"Sign Up"} </h1>
+            <p>{login==0 ? "Welcome back! Inky's excited to see you again. What shall you make today?" : "Inky welcomes you warmly. Your server's future starts here!"}</p>
             <p onClick={()=>{
                 setLogin(login==0?1:0)
-                setLoginText(loginText.includes("Log in")?"Don't have an account? Sign up here":"Already have an account? Log in here")
+                setLoginText(loginText.includes("Log in")?"Don't have an account? Sign Up":"Already have an account? Log In")
             }} style={{marginBottom: '2vh', color: 'blue', textDecorationLine: 'underline'}}>{loginText}</p>
-            <TextField fullWidth style={{paddingBottom: '3vh'}} value={email} onChange={(e)=>{setEmail(e.target.value)}} label="Email" variant="outlined" color="secondary"/>
-            <TextField fullWidth style={{paddingBottom: '3vh'}} value={pwd} onChange={(e)=>{setPwd(e.target.value)}} label="Password" variant="outlined" color="warning" type="password"/>
+            <TextField fullWidth style={{marginBottom: '3vh', backgroundColor: '#d1d1d1', borderRadius: '5px'}} value={email} onChange={(e)=>{setEmail(e.target.value)}} label="Email" variant="outlined" color="secondary"/>
+            <TextField fullWidth style={{marginBottom: '3vh', backgroundColor: '#d1d1d1', borderRadius: '5px'}} value={pwd} onChange={(e)=>{setPwd(e.target.value)}} label="Password" variant="outlined" color="warning" type="password"/>
             {login==0 ? 
                 <p onClick={()=>{
                     if(email!=="")
@@ -31,7 +39,7 @@ const Login = () => {
                     else
                         alert("Please enter your email in the email field!")
                 }} style={{marginBottom: '2vh', color: 'blue', textDecorationLine: 'underline'}}>Forgot Password?</p>:
-                <TextField fullWidth style={{paddingBottom: '3vh'}} value={confirmPwd} onChange={(e)=>{setConfirmPwd(e.target.value)}} label="Confirm Password" variant="outlined" color="warning" type="password"/>
+                <TextField fullWidth style={{marginBottom: '3vh', backgroundColor: '#d1d1d1', borderRadius: '5px'}} value={confirmPwd} onChange={(e)=>{setConfirmPwd(e.target.value)}} label="Confirm Password" variant="outlined" color="warning" type="password"/>
             }
             <Button onClick={()=>{
                 if(login==0){
@@ -46,7 +54,7 @@ const Login = () => {
                             alert(err.message)
                         })
                 }
-            }} style={{marginBottom: '3vh'}} variant="contained">{login==0?"Log In":"Sign Up"}</Button>
+            }} style={{marginBottom: '3vh'}} color="secondary" variant="contained">{login==0?"Log In":"Sign Up"}</Button>
         </div>
     );
 }

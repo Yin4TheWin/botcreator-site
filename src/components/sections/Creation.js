@@ -42,7 +42,7 @@ const Creation = (props) => {
         <div style={{display: 'flex',  justifyContent:'center', flexDirection: 'column', alignItems:'center'}}>
             <h1>Welcome back, {props.user.email.split("@")[0]}!</h1>
             <Button  variant='contained' onClick={()=>{props.signOut(props.auth).then(()=>{ window.location.reload(false);})}}> Sign Out </Button>
-            <div style={{display: 'flex',  justifyContent:'center', flexDirection: 'column', alignItems:'center', height: 'auto', width: 'auto', borderRadius: '15px', backgroundColor: '#498387', paddingLeft: '3vw', paddingRight: '3vw'}}>
+            <div style={{display: 'flex',  justifyContent:'center', flexDirection: 'column', alignItems:'center', height: 'auto', width: 'auto', borderRadius: '15px', backgroundColor: '#028090', paddingLeft: '3vw', paddingRight: '3vw'}}>
             <Modal
             open={open}
             onClose={handleClose}
