@@ -38,7 +38,7 @@ const Creation = () => {
                             alert(err.message)
                         })
                 }
-            }} style={{marginBottom: '3vh'}} variant="contained">Create!</Button>
+            }} style={{marginBottom: '3vh'}} variant="contained">{login==0?"Log In":"Sign Up"}</Button>
         </div>
     );
 }

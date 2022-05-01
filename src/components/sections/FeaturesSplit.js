@@ -122,7 +122,7 @@ const FeaturesSplit = ({
                   Music feature showcase
                   </div>
                 <h3 className="mt-0 mb-12">
-                🎵 Vibe 🎵
+                🎵 Caught a Vibe 🎵
                   </h3>
                 <p className="m-0">
                   Missing a music bot or want your own? No problem. Listen to your favorite tunes with all the features you'd expect out of a standard music player: play, pause and repeat tracks and queues.
