@@ -1,7 +1,7 @@
 import React from 'react';
 import Creation from '../components/sections/Creation'
 import {useAuthState} from 'react-firebase-hooks/auth';
-import { getAuth, sendEmailVerification } from "firebase/auth";
+import { getAuth, sendEmailVerification, signOut } from "firebase/auth";
 import { getDatabase, ref, set } from "firebase/database";
 import { firebase } from '../firebase';
 import Login from '../components/sections/Login'
@@ -23,10 +23,13 @@ const Dashboard = () => {
         })
       }
     }
+    else{
+      setLoggedIn(0)
+    }
   }, [user])
   return (
     <div style={{display: 'flex',  justifyContent:'center', alignItems:'center', height: '100vh'}}>
-        {loggedIn==2?<Creation/>:(loggedIn==1?<Unverified/>:<Login/>)}
+        {loggedIn==2?<Creation user={user} auth={auth} signOut={signOut} changeState={setLoggedIn}/>:(loggedIn==1?<Unverified/>:<Login/>)}
     </div>
   );
 }

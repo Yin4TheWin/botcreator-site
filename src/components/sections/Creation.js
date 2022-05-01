@@ -18,7 +18,7 @@ const style = {
     p: 4,
   };
 
-const Creation = () => {
+const Creation = (props) => {
     const [open, setOpen] = React.useState(false);
     const [name, setName] = React.useState("")
     const [token, setToken] = React.useState("")
@@ -39,7 +39,10 @@ const Creation = () => {
         handleOpen()
     }
     return (
-        <div style={{display: 'flex',  justifyContent:'center', flexDirection: 'column', alignItems:'center', height: 'auto', width: 'auto', borderRadius: '15px', backgroundColor: '#498387', paddingLeft: '3vw', paddingRight: '3vw'}}>
+        <div style={{display: 'flex',  justifyContent:'center', flexDirection: 'column', alignItems:'center'}}>
+            <h1>Welcome back, {props.user.email.split("@")[0]}!</h1>
+            <Button  variant='contained' onClick={()=>{props.signOut(props.auth).then(()=>{ window.location.reload(false);})}}> Sign Out </Button>
+            <div style={{display: 'flex',  justifyContent:'center', flexDirection: 'column', alignItems:'center', height: 'auto', width: 'auto', borderRadius: '15px', backgroundColor: '#498387', paddingLeft: '3vw', paddingRight: '3vw'}}>
             <Modal
             open={open}
             onClose={handleClose}
@@ -55,7 +58,7 @@ const Creation = () => {
                     </Typography>
                 </Box>
             </Modal>
-            <h1> Create a new bot </h1>
+            <h2> Create a new bot </h2>
             <p onClick={()=>{
                 setModalTitle("Setup Instructions")
                 setModalText(`As you'll soon see, getting your own custom Discord bot is really simple! Just fill out the two fields you see in the box. Really quickly, I'll explain what they are and how to find them: ${"\n"}
@@ -65,7 +68,7 @@ const Creation = () => {
             <TextField fullWidth style={{paddingBottom: '3vh'}} value={name} onChange={(e)=>{setName(e.target.value)}} label="Project Name" variant="outlined" color="secondary"/>
             <TextField fullWidth style={{paddingBottom: '3vh'}} value={token} onChange={(e)=>{setToken(e.target.value)}} label="Bot Token" variant="outlined" color="warning" type="password"/>
             <Button onClick={()=>{
-                 axios.post('https://discmaker.yinftw.com/birth', {botToken: token, projectName: name, username: "yinftw"})
+                 axios.post('https://discmaker.yinftw.com/birth', {botToken: token, projectName: name, username: props.user.uid})
                      .then(() => {
                          let projName=name
                          handleSuccess(projName)
@@ -78,6 +81,7 @@ const Creation = () => {
                         }
                      })
             }} style={{marginBottom: '3vh'}} variant="contained">Create!</Button>
+        </div>
         </div>
     );
 }

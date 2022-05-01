@@ -8,7 +8,7 @@ import { getDatabase, ref, set } from "firebase/database";
 const auth = getAuth(firebase)
 const db = getDatabase(firebase)
 
-const Creation = () => {
+const Login = () => {
     const [login, setLogin] = React.useState(0) //0: Log in, 1: Sign up
     const [loginText, setLoginText] = React.useState("Don't have an account? Sign up here")
     const [email, setEmail] = React.useState("")
@@ -43,4 +43,4 @@ const Creation = () => {
     );
 }
 
-export default Creation;
+export default Login;
