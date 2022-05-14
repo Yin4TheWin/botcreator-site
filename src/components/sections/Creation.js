@@ -4,7 +4,10 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
+import { firebase } from '../../firebase';
+import { getDatabase, ref, set } from "firebase/database";
 const axios = require('axios').default;
+const db = getDatabase(firebase)
 
 const style = {
     position: 'absolute',
@@ -71,6 +74,9 @@ const Creation = (props) => {
                  axios.post('https://discmaker.yinftw.com/birth', {botToken: token, projectName: name, username: props.user.uid})
                      .then(() => {
                          let projName=name
+                         set(ref(db, 'users/' + props.user.uid + "/" + name), {
+                             token: token
+                          });
                          handleSuccess(projName)
                         }
                      ).catch(err=>{

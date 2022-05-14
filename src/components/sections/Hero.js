@@ -114,7 +114,7 @@ const Hero = ({
                       </li>
                       <li>
                         <Typography id="modal-modal-description" variant="p" sx={{ mt: 2 }} color="black">
-                            We have your email on file; however, we will not give this information to anyone else or contact you unless you contact us first.
+                            We have your email on file; however, we will not give this information to anyone else or contact you except for important updates or if you contact us first.
                         </Typography>
                       </li>
                     </ul>
