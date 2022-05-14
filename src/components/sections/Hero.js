@@ -136,11 +136,11 @@ const Hero = ({
                 </Box>
             </Modal>
             <h1 className="mt-0 mb-16 reveal-from-bottom" data-reveal-delay="200">
-              Bot <span className="text-color-primary">Ink</span>
+              Bot <span className="text-color-primary">Ink</span> (Under Construction)
             </h1>
             <div className="container-xs">
               <p className="m-0 mb-32 reveal-from-bottom" data-reveal-delay="400">
-              Get a custom discord bot with tons of general features for your members, a functional music player, and excellent moderation tools for just $2.99/month. Simply create an account and setup in seconds!
+              Get a custom discord bot with tons of general features for your members, a functional music player, and excellent moderation tools for just $4.99/month. Simply create an account and setup in seconds!
                 </p>
               <div className="reveal-from-bottom" data-reveal-delay="600">
                 <ButtonGroup>

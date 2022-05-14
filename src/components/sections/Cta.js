@@ -2,7 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { SectionProps } from '../../utils/SectionProps';
-import Input from '../elements/Input';
+import { firebase } from '../../firebase';
+import { Button, TextField } from '@mui/material';
+import { getDatabase, ref, child, push, update } from "firebase/database";
+
+const db = getDatabase(firebase)
 
 const propTypes = {
   ...SectionProps.types,
@@ -27,7 +31,6 @@ const Cta = ({
 }) => {
 
   const outerClasses = classNames(
-    'cta section center-content-mobile reveal-from-bottom',
     topOuterDivider && 'has-top-divider',
     bottomOuterDivider && 'has-bottom-divider',
     hasBgColor && 'has-bg-color',
@@ -42,6 +45,8 @@ const Cta = ({
     split && 'cta-split'
   );  
 
+  const [email, setEmail] = React.useState("")
+
   return (
     <section
       {...props}
@@ -53,15 +58,28 @@ const Cta = ({
         >
           <div className="cta-slogan">
             <h3 className="m-0">
-              For previewing layouts and visual?
+              Want to get updates?
               </h3>
+              <p>
+                We'll send you an email when Bot Ink is ready to launch!
+              </p>
           </div>
-          <div className="cta-action">
-            <Input id="newsletter" type="email" label="Subscribe" labelHidden hasIcon="right" placeholder="Your best email">
-              <svg width="16" height="12" xmlns="http://www.w3.org/2000/svg">
-                <path d="M9 5H1c-.6 0-1 .4-1 1s.4 1 1 1h8v5l7-6-7-6v5z" fill="#376DF9" />
-              </svg>
-            </Input>
+          <div>
+            <TextField style={{marginBottom: '3vh', backgroundColor: '#d1d1d1', borderRadius: '5px'}} value={email} onChange={(e)=>{setEmail(e.target.value)}} label="Email" type="email" variant="outlined" color="secondary"/>
+            <Button variant="contained" onClick={()=>{
+              if(email.toLowerCase().split("@").length==2&&email.toLowerCase().split("@")[1].includes(".")&&email.toLowerCase().split("@")[0].length>0){
+                const newPostKey = push(child(ref(db), 'updates')).key;
+                const updates = {};
+                updates['/updates/' + newPostKey] = email;
+                update(ref(db), updates).then(()=>{
+                  alert("Success! You will be notified when bot ink is available for public use.")
+                }).catch(err=>{
+                  alert(err)
+                })
+              } else{
+                alert("Please enter a valid email address!")
+              }
+            }}>Submit</Button>
           </div>
         </div>
       </div>

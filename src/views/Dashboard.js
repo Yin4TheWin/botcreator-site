@@ -6,6 +6,7 @@ import { getDatabase, ref, set } from "firebase/database";
 import { firebase } from '../firebase';
 import Login from '../components/sections/Login'
 import Unverified from '../components/sections/Unverified'
+import Construction from '../components/sections/Construction'
 
 const auth = getAuth(firebase)
 const db = getDatabase(firebase)
@@ -28,8 +29,8 @@ const Dashboard = () => {
     }
   }, [user])
   return (
-    <div style={{display: 'flex',  justifyContent:'center', alignItems:'center', height: '100vh'}}>
-        {loggedIn==2?<Creation user={user} auth={auth} signOut={signOut} changeState={setLoggedIn}/>:(loggedIn==1?<Unverified/>:<Login/>)}
+    <div style={{display: 'flex',  justifyContent:'center', paddingTop: '5vh', alignItems:'center', height: 'auto'}}>
+        {window.location.href.substring(0,14).toLowerCase()==="https://botink"?<Construction/>:(loggedIn==2?<Creation user={user} auth={auth} signOut={signOut} changeState={setLoggedIn}/>:(loggedIn==1?<Unverified/>:<Login/>))}
     </div>
   );
 }

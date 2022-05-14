@@ -20,12 +20,14 @@ const Login = () => {
 
     return (
         <div style={{display: 'flex',  justifyContent:'center', flexDirection: 'column', alignItems:'center', height: 'auto', width: width, borderRadius: '15px', paddingLeft: '3vw', paddingRight: '3vw'}}>
-            <Image
-            className="has-shadow"
-            src={login==0?require('./../../assets/images/login.png'):require('./../../assets/images/signup.png')}
-            alt="Hero"
-            width={128}
-            height={128} /> 
+            <div>
+                <Image
+                className="has-shadow"
+                src={login==0?require('./../../assets/images/login.png'):require('./../../assets/images/signup.png')}
+                alt="Hero"
+                width={128}
+                height={128} />
+            </div> 
             <h1> {login==0?"Log In":"Sign Up"} </h1>
             <p>{login==0 ? "Welcome back! Inky's excited to see you again. What shall you make today?" : "Inky welcomes you warmly. Your server's future starts here!"}</p>
             <p onClick={()=>{
@@ -39,7 +41,7 @@ const Login = () => {
                     if(email!=="")
                         sendPasswordResetEmail(auth, email).then(()=>{ alert("Password reset email has been sent to "+email) }).catch(()=>{ alert("It seems we do not have your email on file.") })
                     else
-                        alert("Please enter your email in the email field!")
+                        alert("Please enter your email in the email field!") 
                 }} style={{marginBottom: '2vh', color: 'blue', textDecorationLine: 'underline'}}>Forgot Password?</p>:
                 <TextField fullWidth style={{marginBottom: '3vh', backgroundColor: '#d1d1d1', borderRadius: '5px'}} value={confirmPwd} onChange={(e)=>{setConfirmPwd(e.target.value)}} label="Confirm Password" variant="outlined" color="warning" type="password"/>
             }
