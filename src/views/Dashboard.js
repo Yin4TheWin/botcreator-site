@@ -30,7 +30,7 @@ const Dashboard = () => {
   }, [user])
   return (
     <div style={{display: 'flex',  justifyContent:'center', paddingTop: '5vh', alignItems:'center', height: 'auto'}}>
-        {window.location.href.substring(0,14).toLowerCase()==="https://botink"?<Construction/>:(loggedIn==2?<Creation user={user} auth={auth} signOut={signOut} changeState={setLoggedIn}/>:(loggedIn==1?<Unverified/>:<Login/>))}
+        {window.location.href.substring(0,14).toLowerCase()==="https://botink"?<Construction/>:(loggedIn==2?<Creation user={user} auth={auth} signOut={signOut} changeState={setLoggedIn}/>:(loggedIn==1?<Unverified auth={auth} signOut={signOut}/>:<Login/>))}
     </div>
   );
 }
