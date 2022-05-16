@@ -10,7 +10,7 @@ import Box from '@mui/material/Box';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
-import ListItemIcon from '@mui/material/ListItemIcon';
+import Image from '../elements/Image'
 import ListItemText from '@mui/material/ListItemText';
 import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
@@ -55,7 +55,7 @@ const Creation = (props) => {
     return (
         <div style={{display: 'flex',  justifyContent:'center', flexDirection: 'column', alignItems:'center'}}>
             <h1 style={{textAlign: 'center'}}>Welcome back, {props.user.email.split("@")[0]}!</h1>
-            <p>What would you like to do today?</p>
+            <p style={{fontSize: 25}}>What would you like to do today?</p>
             <div style={{display:'flex', flexDirection: layout}}>
                 <div style={{display: 'flex',  justifyContent:'center', flexDirection: 'column', alignItems:'center', height: 'auto', width: 'auto', borderRadius: '15px', paddingLeft: '3vw', paddingRight: '3vw'}}>
                     <Modal
@@ -73,15 +73,23 @@ const Creation = (props) => {
                             </Typography>
                         </Box>
                     </Modal>
-                    <h2> Create a new bot </h2>
+                    <div>
+                        <Image
+                        className="has-shadow"
+                        src={require('./../../assets/images/Create.png')}
+                        alt="Hero"
+                        width={128}
+                        height={128} />
+                    </div> 
+                    <h2> Create a New Bot </h2>
                     <p onClick={()=>{
                         setModalTitle("Setup Instructions")
                         setModalText(`As you'll soon see, getting your own custom Discord bot is really simple! Just fill out the two fields you see in the box. Really quickly, I'll explain what they are and how to find them: ${"\n"}
                         (insert video here)${"\n"}`)
                         handleOpen()
                     }} style={{marginBottom: '2vh', color: 'blue', textDecorationLine: 'underline'}}>(Need help?)</p>
-                    <TextField fullWidth style={{marginBottom: '3vh', backgroundColor: '#d1d1d1'}} value={name} onChange={(e)=>{setName(e.target.value)}} label="Project Name" variant="outlined" color="secondary"/>
-                    <TextField fullWidth style={{marginBottom: '3vh', backgroundColor: '#d1d1d1'}} value={token} onChange={(e)=>{setToken(e.target.value)}} label="Bot Token" variant="outlined" color="warning" type="password"/>
+                    <TextField fullWidth style={{marginBottom: '3vh', borderRadius: '15px', backgroundColor: '#d1d1d1'}} value={name} onChange={(e)=>{setName(e.target.value)}} label="Project Name" variant="outlined" color="secondary"/>
+                    <TextField fullWidth style={{marginBottom: '3vh', borderRadius: '15px', backgroundColor: '#d1d1d1'}} value={token} onChange={(e)=>{setToken(e.target.value)}} label="Bot Token" variant="outlined" color="warning" type="password"/>
                     <Button onClick={()=>{
                         axios.post('https://discmaker.yinftw.com/birth', {botToken: token, projectName: name, username: props.user.uid})
                             .then(() => {
@@ -98,10 +106,18 @@ const Creation = (props) => {
                                     handleFailure("Invalid token or project already exists.")
                                 }
                             })
-                    }} style={{marginBottom: '3vh'}} variant="contained">Continue</Button>
+                    }} style={{marginBottom: '3vh', padding:'3%'}} variant="contained">Continue</Button>
                 </div>
                 <h4 style={{textAlign: 'center', alignSelf: 'center'}}>or..</h4>
                 <div style={{display: 'flex', flexDirection: 'column', alignItems:'center', height: 'auto', width: 'auto', borderRadius: '15px', paddingLeft: '3vw', paddingRight: '3vw'}}>
+                    <div>
+                        <Image
+                        className="has-shadow"
+                        src={require('./../../assets/images/Edit.png')}
+                        alt="Hero"
+                        width={128}
+                        height={128} />
+                    </div> 
                     <h2>Edit Your Existing Bots</h2>
                     <List style={{maxHeight: '50%', width: '100%', overflow: 'auto'}}>
                         <ListItem
@@ -139,7 +155,7 @@ const Creation = (props) => {
                     </List>
                 </div>
             </div>
-            <Button  variant='contained' onClick={()=>{props.signOut(props.auth).then(()=>{ window.location.reload(false);})}}> Sign Out </Button>
+            <Button  variant='contained' style={{padding: '13px'}} onClick={()=>{props.signOut(props.auth).then(()=>{ window.location.reload(false);})}}> Sign Out </Button>
         </div>
     );
 }
