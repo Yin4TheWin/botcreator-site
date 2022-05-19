@@ -4,7 +4,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import { firebase } from '../../firebase';
-import { getDatabase, ref, set } from "firebase/database";
+import { getDatabase, ref, set, get, child } from "firebase/database";
 import {isMobile} from 'react-device-detect';
 import Box from '@mui/material/Box';
 import List from '@mui/material/List';
@@ -38,6 +38,24 @@ const Creation = (props) => {
     const [token, setToken] = React.useState("")
     const [modalTitle, setModalTitle] = React.useState("")
     const [modalText, setModalText] = React.useState("")
+    const [bots, setBots] = React.useState([{name: 'Sample Bot', status: 'Active'}, {name: 'Another Example', status: 'Paused'}])
+    React.useEffect(()=>{
+        const dbRef = ref(db);
+        get(child(dbRef, `users/${props.user.uid}`)).then((snapshot) => {
+          if (snapshot.exists()) {
+              let names = Object.keys(snapshot.val())
+              let list=[]
+              names.forEach(name=>{
+                  list.push({name: name, status: 'Active'})
+              })
+            setBots(list);
+          } else {
+            console.log("No data available");
+          }
+        }).catch((error) => {
+          console.error(error);
+        });
+    }, [props.user.uid])
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
     const handleSuccess = (projName) => {
@@ -90,7 +108,7 @@ const Creation = (props) => {
                     }} style={{marginBottom: '2vh', color: 'blue', textDecorationLine: 'underline'}}>(Need help?)</p>
                     <TextField fullWidth style={{marginBottom: '3vh', borderRadius: '15px', backgroundColor: '#d1d1d1'}} value={name} onChange={(e)=>{setName(e.target.value)}} label="Project Name" variant="outlined" color="secondary"/>
                     <TextField fullWidth style={{marginBottom: '3vh', borderRadius: '15px', backgroundColor: '#d1d1d1'}} value={token} onChange={(e)=>{setToken(e.target.value)}} label="Bot Token" variant="outlined" color="warning" type="password"/>
-                    <Button onClick={()=>{
+                    <Button color="success" onClick={()=>{
                         axios.post('https://discmaker.yinftw.com/birth', {botToken: token, projectName: name, username: props.user.uid})
                             .then(() => {
                                 let projName=name
@@ -109,7 +127,7 @@ const Creation = (props) => {
                     }} style={{marginBottom: '3vh', padding:'3%'}} variant="contained">Continue</Button>
                 </div>
                 <h4 style={{textAlign: 'center', alignSelf: 'center'}}>or..</h4>
-                <div style={{display: 'flex', flexDirection: 'column', alignItems:'center', height: 'auto', width: 'auto', borderRadius: '15px', paddingLeft: '3vw', paddingRight: '3vw'}}>
+                <div style={{display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems:'center', height: 'auto', width: 'auto', borderRadius: '15px', paddingLeft: '3vw', paddingRight: '3vw'}}>
                     <div>
                         <Image
                         className="has-shadow"
@@ -119,43 +137,31 @@ const Creation = (props) => {
                         height={128} />
                     </div> 
                     <h2>Edit Your Existing Bots</h2>
-                    <List style={{maxHeight: '50%', width: '100%', overflow: 'auto'}}>
-                        <ListItem
-                        secondaryAction={
-                            <IconButton edge="end" aria-label="edit">
-                            <EditIcon />
-                            </IconButton>
-                        }
-                        >
-                        <ListItemAvatar>
-                            <Avatar>
-                            <FolderIcon />
-                            </Avatar>
-                        </ListItemAvatar>
-                        <ListItemText
-                            primary="Sample Bot"
-                        />
-                        </ListItem>
-                        <ListItem
-                        secondaryAction={
-                            <IconButton edge="end" aria-label="edit">
-                            <EditIcon />
-                            </IconButton>
-                        }
-                        >
-                        <ListItemAvatar>
-                            <Avatar>
-                            <FolderIcon />
-                            </Avatar>
-                        </ListItemAvatar>
-                        <ListItemText
-                            primary="Another Example"
-                        />
-                        </ListItem>
+                    <List style={{maxHeight: '50%', width: '100%', overflow: 'auto', paddingRight: '2%'}}>
+                        {bots.map(el=>{
+                            return (<ListItem
+                            secondaryAction={
+                                <IconButton style={{backgroundColor: 'white'}} edge="end" aria-label="edit">
+                                <EditIcon />
+                                </IconButton>
+                            }
+                            >
+                            {/* <ListItemAvatar>
+                                <Avatar>
+                                <FolderIcon />
+                                </Avatar>
+                            </ListItemAvatar> */}
+                            <ListItemText
+                                disableTypography
+                                primary={<Typography type="body2" style={{ color: '#6f54f7', fontSize:20 }}>{el.name}</Typography>}
+                                secondary={<p style={{ color: '#FFFFFF' }}>Status: {el.status}</p>}
+                            />
+                            </ListItem>)
+                        })}
                     </List>
                 </div>
             </div>
-            <Button  variant='contained' style={{padding: '13px'}} onClick={()=>{props.signOut(props.auth).then(()=>{ window.location.reload(false);})}}> Sign Out </Button>
+            <Button color="secondary" variant='contained' style={{padding: '13px'}} onClick={()=>{props.signOut(props.auth).then(()=>{ window.location.reload(false);})}}> Sign Out </Button>
         </div>
     );
 }
