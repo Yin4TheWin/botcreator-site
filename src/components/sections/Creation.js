@@ -14,8 +14,8 @@ import Image from '../elements/Image'
 import ListItemText from '@mui/material/ListItemText';
 import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
-import FolderIcon from '@mui/icons-material/Folder';
 import EditIcon from '@mui/icons-material/Edit';
+import { useHistory } from "react-router-dom";
 const axios = require('axios').default;
 const db = getDatabase(firebase)
 
@@ -38,7 +38,8 @@ const Creation = (props) => {
     const [token, setToken] = React.useState("")
     const [modalTitle, setModalTitle] = React.useState("")
     const [modalText, setModalText] = React.useState("")
-    const [bots, setBots] = React.useState([{name: 'Sample Bot', status: 'Active'}, {name: 'Another Example', status: 'Paused'}])
+    const history = useHistory()
+    const [bots, setBots] = React.useState([{name: 'Sample Bot', status: 'Active', bought: false}, {name: 'Another Example', status: 'Paused', bought: false}])
     React.useEffect(()=>{
         const dbRef = ref(db);
         get(child(dbRef, `users/${props.user.uid}`)).then((snapshot) => {
@@ -46,7 +47,7 @@ const Creation = (props) => {
               let names = Object.keys(snapshot.val())
               let list=[]
               names.forEach(name=>{
-                  list.push({name: name, status: 'Active'})
+                  list.push({name: name, status: snapshot.val()[name].status, bought: true})
               })
             setBots(list);
           } else {
@@ -141,7 +142,12 @@ const Creation = (props) => {
                         {bots.map(el=>{
                             return (<ListItem
                             secondaryAction={
-                                <IconButton style={{backgroundColor: 'white'}} edge="end" aria-label="edit">
+                                <IconButton style={{backgroundColor: 'white'}} edge="end" aria-label="edit" onClick={()=>{
+                                    if(!el.bought)
+                                        alert('Create a bot to see it here and customize it!')
+                                    else
+                                        history.push('/edit/'+props.user.uid+'/'+el.name)
+                                }}>
                                 <EditIcon />
                                 </IconButton>
                             }

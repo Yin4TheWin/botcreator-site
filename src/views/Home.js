@@ -7,6 +7,7 @@ import Testimonial from '../components/sections/Testimonial';
 import Cta from '../components/sections/Cta';
 
 const Home = () => {
+
   return (
     <>
       <Hero className="illustration-section-01" />

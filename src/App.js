@@ -9,7 +9,8 @@ import LayoutDefault from './layouts/LayoutDefault';
 // Views 
 import Home from './views/Home';
 import Dashboard from './views/Dashboard'
-
+import Edit from './views/Edit'
+import NotFound from './views/404'
 
 
 const App = () => {
@@ -30,8 +31,10 @@ const App = () => {
     children={() => (
       <HashRouter>
       <Switch>
+        <AppRoute path="/edit/:uid/:name" component={Edit} layout={LayoutDefault} />
         <AppRoute exact path="/dashboard" component={Dashboard} layout={LayoutDefault} />
         <AppRoute exact path="/" component={Home} layout={LayoutDefault} />
+        <AppRoute component={NotFound} layout={LayoutDefault} />
       </Switch>
       </HashRouter>
     )} />
