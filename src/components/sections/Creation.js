@@ -126,6 +126,17 @@ const Creation = (props) => {
                                 }
                             })
                     }} style={{marginBottom: '3vh', padding:'3%'}} variant="contained">Continue</Button>
+                    <Button color="success" onClick ={()=>{
+                        axios.post('https://discmaker.yinftw.com/create-checkout-session', {subPrice: price, subQuantity: quantity, email: props.user.email,
+                        name: '{{CUSTOMER_NAME}}',})
+                            .then(res => {
+                                window.location = res.data.url
+                                if(res.ok) return res.json()
+                            })
+                            .catch(err=>{
+                                handleFailure(err.message)
+                            })
+                    }} style = {{marginBottom: '3vh', padding:'3%'}} variant="contained">Checkout</Button>
                 </div>
                 <h4 style={{textAlign: 'center', alignSelf: 'center'}}>or..</h4>
                 <div style={{display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems:'center', height: 'auto', width: 'auto', borderRadius: '15px', paddingLeft: '3vw', paddingRight: '3vw'}}>
