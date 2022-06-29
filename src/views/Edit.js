@@ -9,16 +9,58 @@ import {isMobile} from 'react-device-detect';
 import IconButton from '@mui/material/IconButton';
 import PauseIcon from '@mui/icons-material/Pause';
 import EditIcon from '@mui/icons-material/Edit';
+import TextField from '@mui/material/TextField';
+import { Button } from '@mui/material';
+import Modal from '@mui/material/Modal';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+const axios = require('axios').default;
 
 const auth = getAuth(firebase)
 const db = getDatabase(firebase)
+
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+};
 
 const Edit = () => {
   const [width, setWidth] = React.useState(isMobile?'75vw':'50vw')
   const [user, loading, error] = useAuthState(auth);
   const [authorized, setAuthorized] = React.useState(0) //0: false, 1: true
-  const [errMsg, setErrMsg] = React.useState("This bot does not exist!")
+  const [token, setToken] = React.useState("")
+  const [errMsg, setErrMsg] = React.useState("This bot does not exist! If you just bought a bot, please try waiting a few seconds then refresh the page.")
+  const [modalTitle, setModalTitle] = React.useState("")
+  const [modalText, setModalText] = React.useState("")
+  const [open, setOpen] = React.useState(false);
+
   const { uid, name } = useParams()
+
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => {
+    setOpen(false);
+    window.location.reload(false);
+  }
+
+  const handleSuccess = (projName) => {
+      setModalTitle("Bot Created 🥳")
+      setModalText("Congratulations, "+projName+" has been created! Now go to a server with your bot in it and use /help to get to know your new creation!")
+      setToken("")
+      handleOpen()
+  }
+  const handleFailure = (msg) => {
+      setModalTitle("Something Went Wrong ☹️")
+      setModalText(msg)
+      handleOpen()
+  }
+
   React.useEffect(()=>{
     const dbRef = ref(db);
     if(user){
@@ -26,10 +68,11 @@ const Edit = () => {
             if(snapshot.exists()){
               console.log("logged in, authorized "+uid)
               setErrMsg("Now Editing "+name)
-              setAuthorized(3)
+              let authState = snapshot.val().status==="Active"?3:4
+              setAuthorized(authState)
             }
             else{
-              setErrMsg("This bot does not exist!")
+              setErrMsg("This bot does not exist! If you just bought a bot, please try waiting a few seconds then refresh the page.")
               setAuthorized(2)
             }
           }).catch((error) => {
@@ -45,9 +88,24 @@ const Edit = () => {
   return (
     <div style={{display: 'flex',  justifyContent:'center', paddingTop: '5vh', alignItems:'center', height: 'auto'}}>
     <div style={{display: 'flex',  justifyContent:'center', flexDirection: 'column', alignItems:'center', height: 'auto', width: width, borderRadius: '15px', paddingLeft: '3vw', paddingRight: '3vw'}}>
+        <Modal
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={style}>
+          <Typography id="modal-modal-title" variant="h6" component="h2" color="black">
+            {modalTitle}
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }} color="black">
+              {modalText}
+            </Typography>
+            </Box>
+        </Modal>
         <Image
         className="has-shadow"
-        src={require('./../assets/images/'+((authorized==0||authorized==3)?'Construction.png':'EditError.png'))}
+        src={require('./../assets/images/'+((authorized==0||authorized>=3)?'Construction.png':'EditError.png'))}
         alt="Hero"
         width={256}
         height={256} />
@@ -55,8 +113,32 @@ const Edit = () => {
         <h2 style={{textAlign:'center'}}>
           {authorized===0?"Loading...":(authorized<3?"Sorry!":"Now Editing - "+name)}
         </h2>
-        {authorized===3?<div style={{width: 'auto', height: 'auto'}}>
+        {authorized>=3?<div style={{width: 'auto', height: 'auto'}}>
           <p>Done? Click <a href="#/dashboard" style={{marginBottom: '2vh', color: 'blue', textDecorationLine: 'underline'}}>here</a> to return to your Dashboard.</p>
+          {authorized==4?
+          <div style={{display: 'flex', height: 'auto', width: 'auto', flexDirection: 'row', justifyContent:'center', alignItems: 'center'}}>
+            <TextField fullWidth style={{marginBottom: '3vh', borderRadius: '15px', backgroundColor: '#d1d1d1', marginRight: '1vw'}} value={token} onChange={(e)=>{setToken(e.target.value)}} label="Set Bot Token" variant="outlined" color="secondary"/>
+            <Button color="success" onClick={()=>{
+              axios.post('https://discmaker.yinftw.com/birth', {botToken: token, projectName: name, username: uid})
+                  .then(() => {
+                      let projName=name
+                      set(ref(db, 'users/' + uid + "/" + name), {
+                          token: token,
+                          status: "Active"
+                      }).then(()=>{
+                        handleSuccess(projName)
+                      })
+                      }
+                  ).catch(err=>{
+                      if(name===""||token===""){
+                          handleFailure("None of the fields may be blank!")
+                      } else{
+                          handleFailure("Invalid token or project already exists.")
+                      }
+                  })
+          }} style={{marginBottom: '3vh', }} variant="contained">Start bot</Button>
+          </div>
+            :<></>}
           <div style={{marginBottom: '5%', display:'flex', flexDirection: 'row', borderRadius: '15px', backgroundColor: '#cc9d78', alignItems: 'center', justifyContent: 'center', width: 'auto', height: 'auto'}}>
            <PauseIcon style={{color: 'black'}}/>
             <h5 style={{ textAlign: 'center', color: 'black'}}>Pause Subscription</h5>
