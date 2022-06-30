@@ -108,31 +108,13 @@ const Creation = (props) => {
                         handleOpen()
                     }} style={{marginBottom: '2vh', color: 'blue', textDecorationLine: 'underline'}}>(Need help?)</p>
                     <TextField fullWidth style={{marginBottom: '3vh', borderRadius: '15px', backgroundColor: '#d1d1d1'}} value={name} onChange={(e)=>{setName(e.target.value)}} label="Project Name" variant="outlined" color="secondary"/>
-                    {/* <TextField fullWidth style={{marginBottom: '3vh', borderRadius: '15px', backgroundColor: '#d1d1d1'}} value={token} onChange={(e)=>{setToken(e.target.value)}} label="Bot Token" variant="outlined" color="warning" type="password"/> */}
-                    {/* <Button color="success" onClick={()=>{
-                        axios.post('https://discmaker.yinftw.com/birth', {botToken: token, projectName: name, username: props.user.uid})
-                            .then(() => {
-                                let projName=name
-                                set(ref(db, 'users/' + props.user.uid + "/" + name), {
-                                    token: token
-                                });
-                                handleSuccess(projName)
-                                }
-                            ).catch(err=>{
-                                if(name===""||token===""){
-                                    handleFailure("None of the fields may be blank!")
-                                } else{
-                                    handleFailure("Invalid token or project already exists.")
-                                }
-                            })
-                    }} style={{marginBottom: '3vh', padding:'3%'}} variant="contained">Continue</Button> */}
                     <Button color="success" onClick ={()=>{
                         if(name.length>0){
                             get(child(ref(db), 'users/' + props.user.uid + "/" + name)).then((snapshot) => {
                                 if(snapshot.exists()){
                                     handleFailure("A project already exists under that name!")
                                 } else {
-                                     axios.post('https://discmaker.yinftw.com/create-checkout-session', {subPrice: 499, subQuantity: 1, email: props.user.email, metadata: {uid: props.user.uid},
+                                     axios.post('https://discmaker.yinftw.com/pay/create-checkout-session', {subPrice: 499, subQuantity: 1, email: props.user.email, metadata: {uid: props.user.uid},
                                      name: '{{CUSTOMER_NAME}}', projName: name})
                                      .then(res => {
                                          window.location = res.data.url

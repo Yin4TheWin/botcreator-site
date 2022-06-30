@@ -68,7 +68,7 @@ const Edit = () => {
             if(snapshot.exists()){
               console.log("logged in, authorized "+uid)
               setErrMsg("Now Editing "+name)
-              let authState = snapshot.val().status==="Active"?3:4
+              let authState = snapshot.val().status==="Active"?3:(snapshot.val().status==="Ready"?4:5) //3 Active, 4 Ready (no token yet), 5 Paused
               setAuthorized(authState)
             }
             else{
@@ -119,7 +119,7 @@ const Edit = () => {
           <div style={{display: 'flex', height: 'auto', width: 'auto', flexDirection: 'row', justifyContent:'center', alignItems: 'center'}}>
             <TextField fullWidth style={{marginBottom: '3vh', borderRadius: '15px', backgroundColor: '#d1d1d1', marginRight: '1vw'}} value={token} onChange={(e)=>{setToken(e.target.value)}} label="Set Bot Token" variant="outlined" color="secondary"/>
             <Button color="success" onClick={()=>{
-              axios.post('https://discmaker.yinftw.com/birth', {botToken: token, projectName: name, username: uid})
+              axios.post('https://discmaker.yinftw.com/bots/birth', {botToken: token, projectName: name, username: uid})
                   .then(() => {
                       let projName=name
                       set(ref(db, 'users/' + uid + "/" + name), {
