@@ -8,6 +8,7 @@ import Image from '../components/elements/Image'
 import {isMobile} from 'react-device-detect';
 import IconButton from '@mui/material/IconButton';
 import PauseIcon from '@mui/icons-material/Pause';
+import PlayIcon from '@mui/icons-material/PlayArrow';
 import EditIcon from '@mui/icons-material/Edit';
 import TextField from '@mui/material/TextField';
 import { Button } from '@mui/material';
@@ -139,10 +140,30 @@ const Edit = () => {
           }} style={{marginBottom: '3vh', }} variant="contained">Start bot</Button>
           </div>
             :<></>}
-          <div style={{marginBottom: '5%', display:'flex', flexDirection: 'row', borderRadius: '15px', backgroundColor: '#cc9d78', alignItems: 'center', justifyContent: 'center', width: 'auto', height: 'auto'}}>
-           <PauseIcon style={{color: 'black'}}/>
-            <h5 style={{ textAlign: 'center', color: 'black'}}>Pause Subscription</h5>
-          </div>
+            {
+              authorized===5?
+              <div onClick ={()=>{
+                if(name.length>0){
+                  axios.post('https://discmaker.yinftw.com/pay/create-checkout-session', {subPrice: 499, subQuantity: 1, email: user.email, metadata: {uid: uid},
+                    name: '{{CUSTOMER_NAME}}', projName: name})
+                    .then(res => {
+                      window.location = res.data.url
+                      if(res.ok) return res.json()
+                      })
+                      .catch(err=>{
+                        handleFailure(err.message)
+                     })
+                    }
+
+            }} style={{marginBottom: '5%', display:'flex', flexDirection: 'row', borderRadius: '15px', backgroundColor: '#cc9d78', alignItems: 'center', justifyContent: 'center', width: 'auto', height: 'auto'}}>
+                <PlayIcon style={{color: 'black'}}/>
+                <h5 style={{ textAlign: 'center', color: 'black'}}>Resume Subscription</h5>
+              </div>:
+              <div style={{marginBottom: '5%', display:'flex', flexDirection: 'row', borderRadius: '15px', backgroundColor: '#cc9d78', alignItems: 'center', justifyContent: 'center', width: 'auto', height: 'auto'}}>
+                <PauseIcon style={{color: 'black'}}/>
+                <h5 style={{ textAlign: 'center', color: 'black'}}>Pause Subscription</h5>
+              </div>
+            }
           <div style={{marginBottom: '5%', display:'flex', flexDirection: 'row', borderRadius: '15px', backgroundColor: '#78bdcc', alignItems: 'center', justifyContent: 'center', width: 'auto', height: 'auto'}}>
            <EditIcon style={{color: 'black'}}/>
             <h5 style={{ textAlign: 'center', color: 'black'}}>Payment Settings</h5>
