@@ -159,15 +159,19 @@ const Edit = () => {
                 <PlayIcon style={{color: 'black'}}/>
                 <h5 style={{ textAlign: 'center', color: 'black'}}>Resume Subscription</h5>
               </div>:
+              // PAUSE BUTTON
               <div style={{marginBottom: '5%', display:'flex', flexDirection: 'row', borderRadius: '15px', backgroundColor: '#cc9d78', alignItems: 'center', justifyContent: 'center', width: 'auto', height: 'auto'}}>
                 <PauseIcon style={{color: 'black'}}/>
                 <h5 style={{ textAlign: 'center', color: 'black'}}>Pause Subscription</h5>
               </div>
+              // END PAUSE BUTTON
             }
+            {/* PAYMENT BUTTON */}
           <div style={{marginBottom: '5%', display:'flex', flexDirection: 'row', borderRadius: '15px', backgroundColor: '#78bdcc', alignItems: 'center', justifyContent: 'center', width: 'auto', height: 'auto'}}>
            <EditIcon style={{color: 'black'}}/>
             <h5 style={{ textAlign: 'center', color: 'black'}}>Payment Settings</h5>
           </div>
+           {/* END PAYMENT BUTTON */}
         </div>:<p style={{textAlign: 'center'}}>{errMsg}</p>}
         </div>
     </div>
