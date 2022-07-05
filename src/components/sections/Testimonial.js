@@ -51,14 +51,14 @@ const Testimonial = ({
       <div className="container">
         <div className={innerClasses}>
           <h1 style={{textAlign: 'center', width: 'auto'}}>Testimonials</h1>
-          <p style={{textAlign: 'center', width: 'auto'}}>Bot Ink is made with ❤️ by a trusted and experienced Discord Bot developer. You can check out my fiverr page and reviews <a href="https://www.fiverr.com/franklinyin/create-a-discord-bot-with-free-hosting" target="_blank" rel="noreferrer noopener" style={{color: 'blue', textDecorationLine: 'underline'}}>here</a>, or keep scrolling to see satisfied customer testimonials.</p>
+          <p style={{textAlign: 'center', width: 'auto'}}>Bot Ink is made with ❤️ by a trusted and experienced Discord Bot developer. You can check out my fiverr page and reviews <a href="https://www.fiverr.com/franklinyin/create-a-discord-bot-with-free-hosting" target="_blank" rel="noreferrer noopener" style={{color: 'blue', textDecorationLine: 'underline'}}>here</a>, or keep scrolling to see a few satisfied customer testimonials.</p>
           <div className={tilesClasses}>
 
             <div className="tiles-item reveal-from-right" data-reveal-delay="200">
               <div className="tiles-item-inner">
                 <div className="testimonial-item-content">
                   <p className="text-sm mb-0">
-                    — This guy is one of the BEST Fiverr people out there! I was asking for a monitoring bot which was not easy to do, yet he made the bot exactly how I wanted it to be while being very quick. And delivered the bot with Excellent quality. He was also very polite and professional in chat. He attended to all my needs and wants and replied to my messages quite fast. Looking forward to doing more projects with you I am %100000 more than satisfied.
+                    — This guy is one of the BEST Fiverr people out there! I was asking for a monitoring bot which was not easy to do, yet he made the bot exactly how I wanted it to be...
                       </p>
                 </div>
                 <div className="testimonial-item-footer text-xs mt-32 mb-0 has-top-divider">
@@ -106,8 +106,62 @@ const Testimonial = ({
             </div>
 
           </div>
+          <div className={tilesClasses}>
+            <div className="tiles-item reveal-from-right" data-reveal-delay="200">
+              <div className="tiles-item-inner">
+                <div className="testimonial-item-content">
+                  <p className="text-sm mb-0">
+                    — Responded really fast, great product for the price and got it on the same day. Would recommend to anyone looking for a budget discord bot!
+                      </p>
+                </div>
+                <div className="testimonial-item-footer text-xs mt-32 mb-0 has-top-divider">
+                  <span className="testimonial-item-name text-color-high">ignskrrrtt</span>
+                  <span className="text-color-low"> / </span>
+                  <span className="testimonial-item-link">
+                    <a>United States</a>
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <div className="tiles-item reveal-from-bottom">
+              <div className="tiles-item-inner">
+                <div className="testimonial-item-content">
+                  <p className="text-sm mb-0">
+                    — Very fast and qualitative work. The bot runs flawlessly and has no problems. Very nice seller who offers a really good collaboration I recommend it
+                      </p>
+                </div>
+                <div className="testimonial-item-footer text-xs mt-32 mb-0 has-top-divider">
+                  <span className="testimonial-item-name text-color-high">lilshrxmp</span>
+                  <span className="text-color-low"> / </span>
+                  <span className="testimonial-item-link">
+                    <a>Germany</a>
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <div className="tiles-item reveal-from-left" data-reveal-delay="200">
+              <div className="tiles-item-inner">
+                <div className="testimonial-item-content">
+                  <p className="text-sm mb-0">
+                    — fast service, friendly and made sure his product was exactly as required.
+                      </p>
+                </div>
+                <div className="testimonial-item-footer text-xs mt-32 mb-0 has-top-divider">
+                  <span className="testimonial-item-name text-color-high">legbreaklenny</span>
+                  <span className="text-color-low"> / </span>
+                  <span className="testimonial-item-link">
+                    <a>Australia</a>
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            </div>
         </div>
       </div>
+
     </section>
   );
 }
