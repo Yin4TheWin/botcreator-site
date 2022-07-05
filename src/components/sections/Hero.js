@@ -3,10 +3,6 @@ import classNames from 'classnames';
 import { SectionProps } from '../../utils/SectionProps';
 import ButtonGroup from '../elements/ButtonGroup';
 import Button from '../elements/Button';
-import Image from '../elements/Image';
-import Typography from '@mui/material/Typography';
-import Modal from '@mui/material/Modal';
-import Box from '@mui/material/Box';
 
 const propTypes = {
   ...SectionProps.types
@@ -68,79 +64,6 @@ const Hero = ({
       <div className="container-sm">
         <div className={innerClasses}>
           <div className="hero-content">
-          <Modal
-            open={open}
-            style={{overflow:'scroll',}}
-            onClose={handleClose}
-            aria-labelledby="modal-modal-title"
-            aria-describedby="modal-modal-description"
-            >
-                <Box sx={style}>
-                    <Typography id="modal-modal-title" variant="h5" component="h2" color="black">
-                        Key Points
-                    </Typography>
-                    <Typography id="modal-modal-description" variant="h6" sx={{ mt: 2 }} color="black">
-                        What information do we store about you?
-                    </Typography>
-                    <ul>
-                      <li>
-                        <Typography id="modal-modal-description" variant="p" sx={{ mt: 2 }} color="black">
-                            For each user, we keep track of their email address and link it to each bot they have purchased. That way, customers can edit their bots and cancel subscriptions when they desire.
-                        </Typography>
-                      </li>
-                      <li>
-                        <Typography id="modal-modal-description" variant="p" sx={{ mt: 2 }} color="black">
-                            We also store your Discord bot's token in order to host your bot on our servers. Your token is stored securely on Firebase, a third party hosting service owned by Google.
-                        </Typography>
-                      </li>
-                      <li>
-                        <Typography id="modal-modal-description" variant="p" sx={{ mt: 2 }} color="black">
-                            Payment info is handled by a third-party service and is not stored.
-                        </Typography>
-                      </li>
-                    </ul>
-                    <Typography id="modal-modal-description" variant="h6" sx={{ mt: 2 }} color="black">
-                        How is your bot token used?
-                    </Typography>
-                    <ul>
-                      <li>
-                        <Typography id="modal-modal-description" variant="p" sx={{ mt: 2 }} color="black">
-                            We need your bot token in order to publish custom commands as your bot.
-                        </Typography>
-                      </li>
-                      <li>
-                        <Typography id="modal-modal-description" variant="p" sx={{ mt: 2 }} color="black">
-                            Before payment, we attempt to log in as your bot (then immediately log out!) in order to confirm that the provided token is valid and to grab your bot's user id (which is publicy available) so we can publish our custom commands later. NOTE: If you do not pay for hosting or the provided token is invalid, we will not store your token on our server!
-                        </Typography>
-                      </li>
-                      <li>
-                        <Typography id="modal-modal-description" variant="p" sx={{ mt: 2 }} color="black">
-                            After payment, we publish our commands to your bot using your token and bot id, then start hosting your bot on our servers using your token. The source code for our server is publicy available on <a target="_blank" rel="noreferrer noopener" style={{color: 'blue', textDecorationLine: 'underline'}} href="https://github.com/Yin4TheWin/botink-server">Github</a> if you would like to verify/get a full look at how your token is used.
-                        </Typography>
-                      </li>
-                    </ul>
-                    <Typography id="modal-modal-description" variant="h6" sx={{ mt: 2 }} color="black">
-                        How are your email and password used?
-                    </Typography>
-                    <ul>
-                      <li>
-                        <Typography id="modal-modal-description" variant="p" sx={{ mt: 2 }} color="black">
-                            We only use your email and password to confirm it's you and log you into your account.
-                        </Typography>
-                      </li>
-                      <li>
-                        <Typography id="modal-modal-description" variant="p" sx={{ mt: 2 }} color="black">
-                            Authentication is handled by Firebase, a secure third-party service provided by Google. We do not have access to your passwords!
-                        </Typography>
-                      </li>
-                      <li>
-                        <Typography id="modal-modal-description" variant="p" sx={{ mt: 2 }} color="black">
-                            We have your email on file; however, we will not give this information to anyone else or contact you except for important updates or if you contact us first.
-                        </Typography>
-                      </li>
-                    </ul>
-                </Box>
-            </Modal>
             <h1 className="mt-0 mb-16 reveal-from-bottom" data-reveal-delay="200">
               Bot <span className="text-color-primary">Ink</span>
             </h1>
