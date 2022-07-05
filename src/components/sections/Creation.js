@@ -101,12 +101,17 @@ const Creation = (props) => {
                         height={128} />
                     </div> 
                     <h2> Create a New Bot </h2>
-                    <p onClick={()=>{
+                    <p>By creating a bot, you agree to our <a onClick={()=>{
                         setModalTitle("Setup Instructions")
                         setModalText(`As you'll soon see, getting your own custom Discord bot is really simple! Just fill out the two fields you see in the box. Really quickly, I'll explain what they are and how to find them: ${"\n"}
                         (insert video here)${"\n"}`)
                         handleOpen()
-                    }} style={{marginBottom: '2vh', color: 'blue', textDecorationLine: 'underline'}}>(Need help?)</p>
+                    }} style={{marginBottom: '2vh', color: 'blue', textDecorationLine: 'underline'}}>terms and conditions</a> and <a onClick={()=>{
+                        setModalTitle("Setup Instructions")
+                        setModalText(`As you'll soon see, getting your own custom Discord bot is really simple! Just fill out the two fields you see in the box. Really quickly, I'll explain what they are and how to find them: ${"\n"}
+                        (insert video here)${"\n"}`)
+                        handleOpen()
+                    }} style={{marginBottom: '2vh', color: 'blue', textDecorationLine: 'underline'}}>privacy policy</a>.</p>
                     <TextField fullWidth style={{marginBottom: '3vh', borderRadius: '15px', backgroundColor: '#d1d1d1'}} value={name} onChange={(e)=>{setName(e.target.value)}} label="Project Name" variant="outlined" color="secondary"/>
                     <Button color="success" onClick ={()=>{
                         if(name.length>0){

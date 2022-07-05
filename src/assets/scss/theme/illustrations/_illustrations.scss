@@ -23,3 +23,8 @@
 .illustration-section-02::after {
 	@include illustration('illustration-section-02.svg', 100%, 253px, null, null, 30px);
 }
+
+// Features illustration 03
+.illustration-section-edit::after {
+	@include illustration('splash.svg', 100%, 286px, top);
+}

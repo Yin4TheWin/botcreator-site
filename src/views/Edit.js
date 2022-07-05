@@ -15,6 +15,7 @@ import { Button } from '@mui/material';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
+
 const axios = require('axios').default;
 
 const auth = getAuth(firebase)
@@ -86,8 +87,12 @@ const Edit = () => {
       setAuthorized(0)
     }
   }, [user, uid, name])
+
   return (
-    <div style={{display: 'flex',  justifyContent:'center', paddingTop: '5vh', alignItems:'center', height: 'auto'}}>
+    <section
+    className="illustration-section-edit"
+  >
+    <div style={{display: 'flex', marginTop:'5vh', justifyContent:'center', alignItems:'center', height: 'auto'}}>
     <div style={{display: 'flex',  justifyContent:'center', flexDirection: 'column', alignItems:'center', height: 'auto', width: width, borderRadius: '15px', paddingLeft: '3vw', paddingRight: '3vw'}}>
         <Modal
           open={open}
@@ -155,19 +160,19 @@ const Edit = () => {
                      })
                     }
 
-            }} style={{marginBottom: '5%', display:'flex', flexDirection: 'row', borderRadius: '15px', backgroundColor: '#cc9d78', alignItems: 'center', justifyContent: 'center', width: 'auto', height: 'auto'}}>
+            }} style={{cursor:'pointer', marginBottom: '5%', display:'flex', flexDirection: 'row', borderRadius: '15px', backgroundColor: '#cc9d78', alignItems: 'center', justifyContent: 'center', width: 'auto', height: 'auto'}}>
                 <PlayIcon style={{color: 'black'}}/>
                 <h5 style={{ textAlign: 'center', color: 'black'}}>Resume Subscription</h5>
               </div>:
               // PAUSE BUTTON
-              <div style={{marginBottom: '5%', display:'flex', flexDirection: 'row', borderRadius: '15px', backgroundColor: '#cc9d78', alignItems: 'center', justifyContent: 'center', width: 'auto', height: 'auto'}}>
+              <div style={{cursor:'pointer', marginBottom: '5%', display:'flex', flexDirection: 'row', borderRadius: '15px', backgroundColor: '#cc9d78', alignItems: 'center', justifyContent: 'center', width: 'auto', height: 'auto'}}>
                 <PauseIcon style={{color: 'black'}}/>
-                <h5 style={{ textAlign: 'center', color: 'black'}}>Pause Subscription</h5>
+                <h5 style={{ textAlign: 'left', color: 'black'}}>Pause Subscription</h5>
               </div>
               // END PAUSE BUTTON
             }
             {/* PAYMENT BUTTON */}
-          <div style={{marginBottom: '5%', display:'flex', flexDirection: 'row', borderRadius: '15px', backgroundColor: '#78bdcc', alignItems: 'center', justifyContent: 'center', width: 'auto', height: 'auto'}}>
+          <div style={{cursor:'pointer', marginBottom: '5%', display:'flex', flexDirection: 'row', borderRadius: '15px', backgroundColor: '#78bdcc', alignItems: 'center', justifyContent: 'center', width: 'auto', height: 'auto'}}>
            <EditIcon style={{color: 'black'}}/>
             <h5 style={{ textAlign: 'center', color: 'black'}}>Payment Settings</h5>
           </div>
@@ -176,6 +181,7 @@ const Edit = () => {
         </div>
     </div>
     </div>
+    </section>
   );
 }
 

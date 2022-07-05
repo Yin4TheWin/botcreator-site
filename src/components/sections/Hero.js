@@ -79,6 +79,26 @@ const Hero = ({
                         Key Points
                     </Typography>
                     <Typography id="modal-modal-description" variant="h6" sx={{ mt: 2 }} color="black">
+                        What information do we store about you?
+                    </Typography>
+                    <ul>
+                      <li>
+                        <Typography id="modal-modal-description" variant="p" sx={{ mt: 2 }} color="black">
+                            For each user, we keep track of their email address and link it to each bot they have purchased. That way, customers can edit their bots and cancel subscriptions when they desire.
+                        </Typography>
+                      </li>
+                      <li>
+                        <Typography id="modal-modal-description" variant="p" sx={{ mt: 2 }} color="black">
+                            We also store your Discord bot's token in order to host your bot on our servers. Your token is stored securely on Firebase, a third party hosting service owned by Google.
+                        </Typography>
+                      </li>
+                      <li>
+                        <Typography id="modal-modal-description" variant="p" sx={{ mt: 2 }} color="black">
+                            Payment info is handled by a third-party service and is not stored.
+                        </Typography>
+                      </li>
+                    </ul>
+                    <Typography id="modal-modal-description" variant="h6" sx={{ mt: 2 }} color="black">
                         How is your bot token used?
                     </Typography>
                     <ul>
@@ -115,21 +135,6 @@ const Hero = ({
                       <li>
                         <Typography id="modal-modal-description" variant="p" sx={{ mt: 2 }} color="black">
                             We have your email on file; however, we will not give this information to anyone else or contact you except for important updates or if you contact us first.
-                        </Typography>
-                      </li>
-                    </ul>
-                    <Typography id="modal-modal-description" variant="h6" sx={{ mt: 2 }} color="black">
-                        What information do we store about you?
-                    </Typography>
-                    <ul>
-                      <li>
-                        <Typography id="modal-modal-description" variant="p" sx={{ mt: 2 }} color="black">
-                            For each user, we keep track of their email address and link it to each bot they have purchased. That way, customers can edit their bots and cancel subscriptions when they desire.
-                        </Typography>
-                      </li>
-                      <li>
-                        <Typography id="modal-modal-description" variant="p" sx={{ mt: 2 }} color="black">
-                            Payment info is handled by a third-party service and is not stored.
                         </Typography>
                       </li>
                     </ul>
