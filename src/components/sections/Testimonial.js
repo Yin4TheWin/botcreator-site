@@ -51,7 +51,7 @@ const Testimonial = ({
       <div className="container">
         <div className={innerClasses}>
           <h1 style={{textAlign: 'center', width: 'auto'}}>Testimonials</h1>
-          <p style={{textAlign: 'center', width: 'auto'}}>Bot Ink is made with ❤️ by a trusted and experienced Discord Bot developer. You can check out my fiverr page and reviews <a href="https://www.fiverr.com/franklinyin/create-a-discord-bot-with-free-hosting" target="_blank" rel="noreferrer noopener" style={{color: 'blue', textDecorationLine: 'underline'}}>here</a>, or keep scrolling to see a few satisfied customer testimonials.</p>
+          <p style={{textAlign: 'center', width: 'auto'}}>Our bots are made with ❤️ by a trusted and experienced Discord Bot developer. You can check out his fiverr page and reviews <a href="https://www.fiverr.com/franklinyin/create-a-discord-bot-with-free-hosting" target="_blank" rel="noreferrer noopener" style={{color: 'blue', textDecorationLine: 'underline'}}>here</a>, or keep scrolling to see a few satisfied customer testimonials.</p>
           <div className={tilesClasses}>
 
             <div className="tiles-item reveal-from-right" data-reveal-delay="200">
