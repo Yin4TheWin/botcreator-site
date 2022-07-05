@@ -28,3 +28,11 @@
 .illustration-section-edit::after {
 	@include illustration('splash.svg', 100%, 286px, top);
 }
+
+.illustration-section-03::after {
+	@include illustration('splash.svg', 100%, 253px, null, 20vw, null);
+}
+
+.illustration-section-04::after {
+	@include illustration('green.svg', 100%, 253px, null, -15vw, -3vh);
+}

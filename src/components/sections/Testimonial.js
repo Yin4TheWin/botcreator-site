@@ -2,6 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 import { SectionTilesProps } from '../../utils/SectionProps';
 import SectionHeader from './partials/SectionHeader';
+import Button from '../elements/Button';
 
 const propTypes = {
   ...SectionTilesProps.types
@@ -157,7 +158,13 @@ const Testimonial = ({
                 </div>
               </div>
             </div>
-
+            </div>
+            <div style={{display: 'flex', flexDirection:'column', alignItems: 'center', justifyContent: 'center'}}>
+              <h1 style={{textAlign: 'center', width: 'auto'}}>What are you waiting for?</h1>
+              <p style={{textAlign: 'center', width: 'auto'}}>Let us help you build the server and brand of your dreams!</p>
+              <Button tag="a" color="primary" wideMobile href="#/dashboard">
+                Get started
+              </Button>
             </div>
         </div>
       </div>
