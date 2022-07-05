@@ -34,7 +34,7 @@ const App = () => {
         <AppRoute path="/edit/:uid/:name" component={Edit} layout={LayoutDefault} />
         <AppRoute exact path="/dashboard" component={Dashboard} layout={LayoutDefault} />
         <AppRoute exact path="/" component={Home} layout={LayoutDefault} />
-        <AppRoute component={NotFound} layout={LayoutDefault} />
+        {/* <AppRoute component={NotFound} layout={LayoutDefault} /> */}
       </Switch>
       </HashRouter>
     )} />

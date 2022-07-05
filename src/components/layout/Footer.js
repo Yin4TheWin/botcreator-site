@@ -44,7 +44,7 @@ const Footer = ({
           </div>
           <div className="footer-bottom space-between text-xxs invert-order-desktop">
             <FooterNav />
-            <div className="footer-copyright"> Template by <a href="https://cruip.com">Cruip</a>.</div>
+            <div className="footer-copyright">Made with ❤️, 2022.</div>
           </div>
         </div>
       </div>

@@ -114,7 +114,7 @@ const Hero = ({
                       </li>
                       <li>
                         <Typography id="modal-modal-description" variant="p" sx={{ mt: 2 }} color="black">
-                            After payment, we publish our commands to your bot using your token and bot id, then start hosting your bot on our servers using your token. The source code for our server is publicy available on <a target="_blank" style={{color: 'blue', textDecorationLine: 'underline'}} href="https://github.com/Yin4TheWin/botink-server">Github</a> if you would like to verify/get a full look at how your token is used.
+                            After payment, we publish our commands to your bot using your token and bot id, then start hosting your bot on our servers using your token. The source code for our server is publicy available on <a target="_blank" rel="noreferrer noopener" style={{color: 'blue', textDecorationLine: 'underline'}} href="https://github.com/Yin4TheWin/botink-server">Github</a> if you would like to verify/get a full look at how your token is used.
                         </Typography>
                       </li>
                     </ul>

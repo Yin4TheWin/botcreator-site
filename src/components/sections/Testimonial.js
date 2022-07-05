@@ -43,11 +43,6 @@ const Testimonial = ({
     pushLeft && 'push-left'
   );
 
-  const sectionHeader = {
-    title: 'Testimonials',
-    paragraph: 'Bot Ink is made with ❤️ by a trusted and experienced Discord Bot developer. You can check out my fiverr page and reviews here, or keep scrolling to see satisfied customer testimonials.'
-  };
-
   return (
     <section
       {...props}
@@ -55,7 +50,8 @@ const Testimonial = ({
     >
       <div className="container">
         <div className={innerClasses}>
-          <SectionHeader data={sectionHeader} className="center-content" />
+          <h1 style={{textAlign: 'center', width: 'auto'}}>Testimonials</h1>
+          <p style={{textAlign: 'center', width: 'auto'}}>Bot Ink is made with ❤️ by a trusted and experienced Discord Bot developer. You can check out my fiverr page and reviews <a href="https://www.fiverr.com/franklinyin/create-a-discord-bot-with-free-hosting" target="_blank" rel="noreferrer noopener" style={{color: 'blue', textDecorationLine: 'underline'}}>here</a>, or keep scrolling to see satisfied customer testimonials.</p>
           <div className={tilesClasses}>
 
             <div className="tiles-item reveal-from-right" data-reveal-delay="200">
@@ -69,7 +65,7 @@ const Testimonial = ({
                   <span className="testimonial-item-name text-color-high">aldrintigulo</span>
                   <span className="text-color-low"> / </span>
                   <span className="testimonial-item-link">
-                    <a href="#0">Phillipines</a>
+                    <a>Phillipines</a>
                   </span>
                 </div>
               </div>
@@ -86,7 +82,7 @@ const Testimonial = ({
                   <span className="testimonial-item-name text-color-high">karamspn</span>
                   <span className="text-color-low"> / </span>
                   <span className="testimonial-item-link">
-                    <a href="#0">Denmark</a>
+                    <a>Denmark</a>
                   </span>
                 </div>
               </div>
@@ -103,7 +99,7 @@ const Testimonial = ({
                   <span className="testimonial-item-name text-color-high">elkoteluigi</span>
                   <span className="text-color-low"> / </span>
                   <span className="testimonial-item-link">
-                    <a href="#0">Chile</a>
+                    <a>Chile</a>
                   </span>
                 </div>
               </div>
