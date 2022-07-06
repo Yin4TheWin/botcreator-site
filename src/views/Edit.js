@@ -53,7 +53,7 @@ const Edit = () => {
 
   const handleSuccess = (projName) => {
       setModalTitle("Bot Created 🥳")
-      setModalText("Congratulations, "+projName+" has been created! Now go to a server with your bot in it and use /help to get to know your new creation!")
+      setModalText("Congratulations, "+projName.replaceAll("-", " ")+" has been created! Now go to a server with your bot in it and use /help to get to know your new creation!")
       setToken("")
       handleOpen()
   }
@@ -69,7 +69,7 @@ const Edit = () => {
         get(child(dbRef, `users/${uid}/${name}`)).then((snapshot) => {
             if(snapshot.exists()){
               console.log("logged in, authorized "+uid)
-              setErrMsg("Now Editing "+name)
+              setErrMsg("Now Editing "+name.replaceAll("-", " "))
               let authState = snapshot.val().status==="Active"?3:(snapshot.val().status==="Ready"?4:5) //3 Active, 4 Ready (no token yet), 5 Paused
               setAuthorized(authState)
             }
@@ -117,7 +117,7 @@ const Edit = () => {
         height={256} />
         <div style={{width: 'auto'}}>
         <h2 style={{textAlign:'center'}}>
-          {authorized===0?"Loading...":(authorized<3?"Sorry!":"Now Editing - "+name)}
+          {authorized===0?"Loading...":(authorized<3?"Sorry!":"Now Editing - "+name.replaceAll("-"," "))}
         </h2>
         {authorized>=3?<div style={{width: 'auto', height: 'auto'}}>
           <p>Done? Click <a href="#/dashboard" style={{marginBottom: '2vh', color: 'blue', textDecorationLine: 'underline'}}>here</a> to return to your Dashboard.</p>
@@ -165,14 +165,38 @@ const Edit = () => {
                 <h5 style={{ textAlign: 'center', color: 'black'}}>Resume Subscription</h5>
               </div>:
               // PAUSE BUTTON
-              <div style={{cursor:'pointer', marginBottom: '5%', display:'flex', flexDirection: 'row', borderRadius: '15px', backgroundColor: '#cc9d78', alignItems: 'center', justifyContent: 'center', width: 'auto', height: 'auto'}}>
+              <div onClick ={()=>{
+                if(name.length>0){
+                  axios.post('https://discmaker.yinftw.com/pay/pause-subscription', {subPrice: 499, subQuantity: 1, email: user.email, metadata: {uid: uid},
+                    name: '{{CUSTOMER_NAME}}', projName: name})
+                    .then(res => {
+                      window.location = res.data.url
+                      if(res.ok) return res.json()
+                      })
+                      .catch(err=>{
+                        handleFailure(err.message)
+                     })
+                    }
+              }} style={{cursor:'pointer', marginBottom: '5%', display:'flex', flexDirection: 'row', borderRadius: '15px', backgroundColor: '#cc9d78', alignItems: 'center', justifyContent: 'center', width: 'auto', height: 'auto'}}>
                 <PauseIcon style={{color: 'black'}}/>
-                <h5 style={{ textAlign: 'left', color: 'black'}}>Pause Subscription</h5>
+                <h5 style={{ textAlign: 'left', color: 'black'}}>Pause Subscription Renewal</h5>
               </div>
               // END PAUSE BUTTON
             }
             {/* PAYMENT BUTTON */}
-          <div style={{cursor:'pointer', marginBottom: '5%', display:'flex', flexDirection: 'row', borderRadius: '15px', backgroundColor: '#78bdcc', alignItems: 'center', justifyContent: 'center', width: 'auto', height: 'auto'}}>
+          <div onClick ={()=>{
+            if(name.length>0){
+              axios.post('https://discmaker.yinftw.com/pay/manage-subscription', {subPrice: 499, subQuantity: 1, email: user.email, metadata: {uid: uid},
+                name: '{{CUSTOMER_NAME}}', projName: name})
+                .then(res => {
+                  window.location = res.data.url
+                  if(res.ok) return res.json()
+                  })
+                  .catch(err=>{
+                    handleFailure(err.message)
+                 })
+                }
+          }}style={{cursor:'pointer', marginBottom: '5%', display:'flex', flexDirection: 'row', borderRadius: '15px', backgroundColor: '#78bdcc', alignItems: 'center', justifyContent: 'center', width: 'auto', height: 'auto'}}>
            <EditIcon style={{color: 'black'}}/>
             <h5 style={{ textAlign: 'center', color: 'black'}}>Payment Settings</h5>
           </div>
