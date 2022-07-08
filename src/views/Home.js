@@ -15,7 +15,7 @@ const Home = () => {
       <InkyPrivacy className="illustration-section-04" />
       {/* <FeaturesTiles /> */}
       <FeaturesSplit invertMobile topDivider imageFill className="illustration-section-02" />
-      <Testimonial topDivider />
+      <Testimonial topDivider className='illustration-section-05'/>
       {/* <Cta split /> */}
     </>
   );

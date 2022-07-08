@@ -51,7 +51,7 @@ const Edit = () => {
     window.location.reload(false);
   }
 
-  const handleSuccess = (projName) => {
+  const onCreateBot = (projName) => {
       setModalTitle("Bot Created 🥳")
       setModalText("Congratulations, "+projName.replaceAll("-", " ")+" has been created! Now go to a server with your bot in it and use /help to get to know your new creation!")
       setToken("")
@@ -61,6 +61,12 @@ const Edit = () => {
       setModalTitle("Something Went Wrong ☹️")
       setModalText(msg)
       handleOpen()
+  }
+
+  const handleSuccess = (msg) => {
+    setModalTitle("Something Went Right 🥳")
+    setModalText(msg)
+    handleOpen()
   }
 
   React.useEffect(()=>{
@@ -132,7 +138,7 @@ const Edit = () => {
                           token: token,
                           status: "Active"
                       }).then(()=>{
-                        handleSuccess(projName)
+                        onCreateBot(projName)
                       })
                       }
                   ).catch(err=>{
@@ -149,15 +155,30 @@ const Edit = () => {
               authorized===5?
               <div onClick ={()=>{
                 if(name.length>0){
-                  axios.post('https://discmaker.yinftw.com/pay/create-checkout-session', {subPrice: 499, subQuantity: 1, email: user.email, metadata: {uid: uid},
-                    name: '{{CUSTOMER_NAME}}', projName: name})
-                    .then(res => {
-                      window.location = res.data.url
-                      if(res.ok) return res.json()
-                      })
-                      .catch(err=>{
-                        handleFailure(err.message)
-                     })
+                  axios.post('https://discmaker.yinftw.com/pay/subscription-status', {username: uid, projectName: name})
+                  .then(res => {
+                      if(res.data.status==='paused'){
+                        axios.post('https://discmaker.yinftw.com/pay/resume-subscription', {uid: uid, projName: name}).then(res=>{
+                          handleSuccess("Your billing cycle has been resumed.")
+                        }).catch(err=>{
+                          handleFailure(err.message)
+                        })
+                      } else if(res.data.status==='dead'){
+                        axios.post('https://discmaker.yinftw.com/pay/create-checkout-session', {subPrice: 499, subQuantity: 1, email: user.email, metadata: {uid: uid}, projName: name})
+                        .then(res => {
+                          window.location = res.data.url
+                          if(res.ok) return res.json()
+                          })
+                          .catch(err=>{
+                            handleFailure(err.message)
+                         }) 
+                      } else{
+                        handleFailure("How is this possible... subscription status is "+res.data.status)
+                      }
+                    })
+                    .catch(err=>{
+                      handleFailure(err.message)
+                   })
                     }
 
             }} style={{cursor:'pointer', marginBottom: '5%', display:'flex', flexDirection: 'row', borderRadius: '15px', backgroundColor: '#cc9d78', alignItems: 'center', justifyContent: 'center', width: 'auto', height: 'auto'}}>
@@ -167,11 +188,9 @@ const Edit = () => {
               // PAUSE BUTTON
               <div onClick ={()=>{
                 if(name.length>0){
-                  axios.post('https://discmaker.yinftw.com/pay/pause-subscription', {subPrice: 499, subQuantity: 1, email: user.email, metadata: {uid: uid},
-                    name: '{{CUSTOMER_NAME}}', projName: name})
+                  axios.post('https://discmaker.yinftw.com/pay/pause-subscription', {uid:uid, projName: name})
                     .then(res => {
-                      window.location = res.data.url
-                      if(res.ok) return res.json()
+                      handleSuccess("Your subscription has been paused! The bot will continue to run until the end of your billing cycle. You may resume any time before then to keep your current billing cycle.")
                       })
                       .catch(err=>{
                         handleFailure(err.message)

@@ -72,7 +72,7 @@ const Creation = (props) => {
         handleOpen()
     }
     return (
-        <div style={{display: 'flex',  justifyContent:'center', flexDirection: 'column', alignItems:'center'}}>
+        <div style={{display: 'flex',  justifyContent:'center', flexDirection: 'column', alignItems:'center', height: 'auto', width: 'auto'}}>
             <h1 style={{textAlign: 'center'}}>Welcome back, {props.user.email.split("@")[0]}!</h1>
             <p style={{fontSize: 25}}>What would you like to do today?</p>
             <div style={{display:'flex', flexDirection: layout}}>
@@ -120,7 +120,7 @@ const Creation = (props) => {
                                     handleFailure("A project already exists under that name!")
                                 } else {
                                      axios.post('https://discmaker.yinftw.com/pay/create-checkout-session', {subPrice: 499, subQuantity: 1, email: props.user.email, metadata: {uid: props.user.uid},
-                                     name: '{{CUSTOMER_NAME}}', projName: name.replaceAll(" ", "-")})
+                                     projName: name.replaceAll(" ", "-")})
                                      .then(res => {
                                          window.location = res.data.url
                                          if(res.ok) return res.json()

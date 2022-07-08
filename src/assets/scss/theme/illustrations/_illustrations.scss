@@ -36,3 +36,7 @@
 .illustration-section-04::after {
 	@include illustration('green.svg', 100%, 253px, null, -15vw, -3vh);
 }
+
+.illustration-section-05::after {
+	@include illustration('blue.svg', 100%, 253px, bottom, 15vw, 5vh);
+}
