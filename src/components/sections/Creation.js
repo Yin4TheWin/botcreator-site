@@ -72,11 +72,11 @@ const Creation = (props) => {
         handleOpen()
     }
     return (
-        <div style={{display: 'flex',  justifyContent:'center', flexDirection: 'column', alignItems:'center', height: 'auto', width: 'auto'}}>
+        <div style={{display: 'flex',  flexDirection: 'column', height: 'auto', width: 'auto', alignItems: 'center', justifyContent: 'center'}}>
             <h1 style={{textAlign: 'center'}}>Welcome back, {props.user.email.split("@")[0]}!</h1>
             <p style={{fontSize: 25}}>What would you like to do today?</p>
             <div style={{display:'flex', flexDirection: layout}}>
-                <div style={{display: 'flex',  justifyContent:'center', flexDirection: 'column', alignItems:'center', height: 'auto', width: 'auto', borderRadius: '15px', paddingLeft: '3vw', paddingRight: '3vw'}}>
+                <div style={{display: 'flex',  flexDirection: 'column',alignItems: 'center', justifyContent: 'center', height: 'auto', width: 'auto', borderRadius: '15px', paddingLeft: '3vw', paddingRight: '3vw'}}>
                     <Modal
                     open={open}
                     onClose={handleClose}
@@ -135,8 +135,8 @@ const Creation = (props) => {
                         }
                     }} style = {{marginBottom: '3vh', padding:'3%'}} variant="contained">Continue</Button>
                 </div>
-                <h4 style={{textAlign: 'center', alignSelf: 'center'}}>or..</h4>
-                <div style={{display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems:'center', height: 'auto', width: 'auto', borderRadius: '15px', paddingLeft: '3vw', paddingRight: '3vw'}}>
+                <h4 style={{display: 'flex',  flexDirection: 'column', height: 'auto', width: 'auto', alignItems: 'center', justifyContent: 'center'}}>or...</h4>
+                <div style={{display: 'flex', flexDirection: 'column', height: isMobile?'75vh':'50vh', width: 'auto', borderRadius: '15px', paddingLeft: '3vw', paddingRight: '3vw', alignItems: 'center', justifyContent: 'center'}}>
                     <div>
                         <Image
                         className="has-shadow"
@@ -146,7 +146,7 @@ const Creation = (props) => {
                         height={128} />
                     </div> 
                     <h2>Edit Your Existing Bots</h2>
-                    <List style={{maxHeight: '50%', width: '100%', overflow: 'auto', paddingRight: '2%'}}>
+                    <List style={{maxHeight: '100%', width: '100%', overflow: 'auto', paddingRight: '2%'}}>
                         {bots.map(el=>{
                             return (<ListItem
                             secondaryAction={

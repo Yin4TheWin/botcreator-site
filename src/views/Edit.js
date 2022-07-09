@@ -193,7 +193,7 @@ const Edit = () => {
                       handleSuccess("Your subscription has been paused! The bot will continue to run until the end of your billing cycle. You may resume any time before then to keep your current billing cycle.")
                       })
                       .catch(err=>{
-                        handleFailure(err.message)
+                        handleFailure("You might be trying to pause too quickly, please wait a few seconds and try again. If the issue persists, please let us know on our support server.")
                      })
                     }
               }} style={{cursor:'pointer', marginBottom: '5%', display:'flex', flexDirection: 'row', borderRadius: '15px', backgroundColor: '#cc9d78', alignItems: 'center', justifyContent: 'center', width: 'auto', height: 'auto'}}>
