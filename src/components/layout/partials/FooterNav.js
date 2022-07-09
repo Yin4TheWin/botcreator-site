@@ -19,10 +19,10 @@ const FooterNav = ({
     >
       <ul className="list-reset">
         <li>
-          <Link to="#0">Terms and Conditions</Link>
+          <Link to="/toc">Terms and Conditions</Link>
         </li>
         <li>
-          <Link to="#0">Privacy Policy</Link>
+          <Link to="/privacy">Privacy Policy</Link>
         </li>
         <li>
           <a href="https://discord.gg/qEtqDbZj7H" target="_blank" rel="noreferrer noopener">Support</a>

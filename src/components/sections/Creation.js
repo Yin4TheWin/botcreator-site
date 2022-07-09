@@ -12,7 +12,7 @@ import ListItem from '@mui/material/ListItem';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Image from '../elements/Image'
 import ListItemText from '@mui/material/ListItemText';
-import Avatar from '@mui/material/Avatar';
+import Checkbox from '@mui/material/Checkbox';
 import IconButton from '@mui/material/IconButton';
 import EditIcon from '@mui/icons-material/Edit';
 import { useHistory } from "react-router-dom";
@@ -101,17 +101,10 @@ const Creation = (props) => {
                         height={128} />
                     </div> 
                     <h2> Create a New Bot </h2>
-                    <p>By creating a bot, you agree to our <a onClick={()=>{
-                        setModalTitle("Setup Instructions")
-                        setModalText(`As you'll soon see, getting your own custom Discord bot is really simple! Just fill out the two fields you see in the box. Really quickly, I'll explain what they are and how to find them: ${"\n"}
-                        (insert video here)${"\n"}`)
-                        handleOpen()
-                    }} style={{marginBottom: '2vh', color: 'blue', textDecorationLine: 'underline'}}>terms and conditions</a> and <a onClick={()=>{
-                        setModalTitle("Setup Instructions")
-                        setModalText(`As you'll soon see, getting your own custom Discord bot is really simple! Just fill out the two fields you see in the box. Really quickly, I'll explain what they are and how to find them: ${"\n"}
-                        (insert video here)${"\n"}`)
-                        handleOpen()
-                    }} style={{marginBottom: '2vh', color: 'blue', textDecorationLine: 'underline'}}>privacy policy</a>.</p>
+                    <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
+                    {/* <Checkbox style={{alignSelf: 'center'}}/> */}
+                    <p style={{textAlign: 'center', alignSelf: 'center'}}>By creating a bot, you agree to our <a href="#/toc" target="_blank" rel="noreferrer noopener" style={{marginBottom: '2vh', color: 'blue', textDecorationLine: 'underline'}}>terms and conditions</a> and <a href="#/privacy" target="_blank" rel="noreferrer noopener" style={{marginBottom: '2vh', color: 'blue', textDecorationLine: 'underline'}}>privacy policy</a>.</p>
+                    </div>
                     <TextField fullWidth style={{marginBottom: '3vh', borderRadius: '15px', backgroundColor: '#d1d1d1'}} value={name} onChange={(e)=>{setName(e.target.value)}} label="Project Name" variant="outlined" color="secondary"/>
                     <Button color="success" onClick ={()=>{
                         if(name.length>0){

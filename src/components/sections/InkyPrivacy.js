@@ -142,7 +142,7 @@ const Hero = ({
                 alt="Hero"
                 width={256}
                 height={256} /> 
-                <p>Meet Inky, the sentient squid who makes your bots! He wants you to read our <a onClick={()=>{setOpen(true)}} style={{marginBottom: '2vh', color: 'blue', textDecorationLine: 'underline'}}>privacy policy</a> so you know how your bot token is used.</p>
+                <p>Meet Inky, the sentient squid who makes your bots! He wants you to read our <a href="#/privacy" target="_blank" rel="noopener noreferrer" style={{marginBottom: '2vh', color: 'blue', textDecorationLine: 'underline'}}>privacy policy</a> so you know how your bot token is used.</p>
           </div>
         </div>
       </div>
