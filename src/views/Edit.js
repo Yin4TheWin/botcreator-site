@@ -42,6 +42,7 @@ const Edit = () => {
   const [modalTitle, setModalTitle] = React.useState("")
   const [modalText, setModalText] = React.useState("")
   const [open, setOpen] = React.useState(false);
+  const [inviteLink, setInviteLink] = React.useState("javascript:void(0)")
 
   const { uid, name } = useParams()
 
@@ -51,9 +52,11 @@ const Edit = () => {
     window.location.reload(false);
   }
 
-  const onCreateBot = (projName) => {
+  const onCreateBot = (projName, clientId) => {
+      const inviteLink="https://discord.com/api/oauth2/authorize?client_id="+clientId+"&permissions=8&scope=applications.commands%20bot"
+      setInviteLink(inviteLink)
       setModalTitle("Bot Created 🥳")
-      setModalText("Congratulations, "+projName.replaceAll("-", " ")+" has been created! Now go to a server with your bot in it and use /help to get to know your new creation!")
+      setModalText("Congratulations, "+projName.replaceAll("-", " ")+" has been created! ")
       setToken("")
       handleOpen()
   }
@@ -64,7 +67,7 @@ const Edit = () => {
   }
 
   const handleSuccess = (msg) => {
-    setModalTitle("Something Went Right 🥳")
+    setModalTitle("Success 🥳")
     setModalText(msg)
     handleOpen()
   }
@@ -78,6 +81,7 @@ const Edit = () => {
               setErrMsg("Now Editing "+name.replaceAll("-", " "))
               let authState = snapshot.val().status==="Active"?3:(snapshot.val().status==="Ready"?4:5) //3 Active, 4 Ready (no token yet), 5 Paused
               setAuthorized(authState)
+              setInviteLink("https://discord.com/api/oauth2/authorize?client_id="+snapshot.val().client+"&permissions=8&scope=applications.commands%20bot")
             }
             else{
               setErrMsg("This bot does not exist! If you just bought a bot, please try waiting a few seconds then refresh the page.")
@@ -113,6 +117,9 @@ const Edit = () => {
           <Typography id="modal-modal-description" sx={{ mt: 2 }} color="black">
               {modalText}
             </Typography>
+            {modalTitle.includes("Bot Created")?<Typography id="modal-modal-description" sx={{ mt: 2 }} color="black">
+              <a style={{color: 'blue'}} href={inviteLink}>Click here</a> to invite your bot to servers, then use its "help" slash command to get to know your own creation!
+            </Typography>:<></>}
             </Box>
         </Modal>
         <Image
@@ -126,31 +133,31 @@ const Edit = () => {
           {authorized===0?"Loading...":(authorized<3?"Sorry!":"Now Editing - "+name.replaceAll("-"," "))}
         </h2>
         {authorized>=3?<div style={{width: 'auto', height: 'auto'}}>
-          <p>Done? Click <a href="#/dashboard" style={{marginBottom: '2vh', color: 'blue', textDecorationLine: 'underline'}}>here</a> to return to your Dashboard.</p>
+          <p style={{textAlign:'center'}}>Done? <a href="#/dashboard" style={{marginBottom: '2vh', color: 'blue', textDecorationLine: 'underline'}}>Return to your Dashboard.</a></p>
           {authorized==4?
           <div style={{display: 'flex', height: 'auto', width: 'auto', flexDirection: 'row', justifyContent:'center', alignItems: 'center'}}>
             <TextField fullWidth style={{marginBottom: '3vh', borderRadius: '15px', backgroundColor: '#d1d1d1', marginRight: '1vw'}} value={token} onChange={(e)=>{setToken(e.target.value)}} label="Set Bot Token" variant="outlined" color="secondary"/>
             <Button color="success" onClick={()=>{
               axios.post('https://discmaker.yinftw.com/bots/birth', {botToken: token, projectName: name, username: uid})
-                  .then(() => {
+                  .then((res) => {
                       let projName=name
+                      console.log(res)
                       set(ref(db, 'users/' + uid + "/" + name), {
                           token: token,
+                          client: res.data.client,
                           status: "Active"
                       }).then(()=>{
-                        onCreateBot(projName)
+                        onCreateBot(projName, res.data.client)
                       })
                       }
                   ).catch(err=>{
-                      if(name===""||token===""){
-                          handleFailure("None of the fields may be blank!")
-                      } else{
-                          handleFailure("Invalid token or project already exists.")
-                      }
+                    console.log(err)
+                    handleFailure(err.response.data.error)
                   })
           }} style={{marginBottom: '3vh', }} variant="contained">Start bot</Button>
           </div>
-            :<></>}
+            :<p style={{textAlign:'center'}}>Or, click {inviteLink==="javascript:void(0)"?<a href={inviteLink} style={{marginBottom: '2vh', color: 'blue', textDecorationLine: 'underline'}} >here</a>:<a href={inviteLink} style={{marginBottom: '2vh', color: 'blue', textDecorationLine: 'underline'}}  target="_blank" rel="noopener noreferrer" >here</a>} to invite your bot to a server.</p>
+          }
             {
               authorized===5?
               <div onClick ={()=>{
