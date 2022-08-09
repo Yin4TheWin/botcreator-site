@@ -81,7 +81,8 @@ const Edit = () => {
               setErrMsg("Now Editing "+name.replaceAll("-", " "))
               let authState = snapshot.val().status==="Active"?3:(snapshot.val().status==="Ready"?4:5) //3 Active, 4 Ready (no token yet), 5 Paused
               setAuthorized(authState)
-              setInviteLink("https://discord.com/api/oauth2/authorize?client_id="+snapshot.val().client+"&permissions=8&scope=applications.commands%20bot")
+              let inv = snapshot.val().client?"https://discord.com/api/oauth2/authorize?client_id="+snapshot.val().client+"&permissions=8&scope=applications.commands%20bot":"javascript:void(0)"
+              setInviteLink(inv)
             }
             else{
               setErrMsg("This bot does not exist! If you just bought a bot, please try waiting a few seconds then refresh the page.")
@@ -135,6 +136,8 @@ const Edit = () => {
         {authorized>=3?<div style={{width: 'auto', height: 'auto'}}>
           <p style={{textAlign:'center'}}>Done? <a href="#/dashboard" style={{marginBottom: '2vh', color: 'blue', textDecorationLine: 'underline'}}>Return to your Dashboard.</a></p>
           {authorized==4?
+          <div>
+          <p style={{textAlign:'center'}}>{<a href='https://yin4thewin.gitbook.io/bot-ink/' style={{marginBottom: '2vh', color: 'blue', textDecorationLine: 'underline'}}  target="_blank" rel="noopener noreferrer" >Need help getting your token?</a>}</p>
           <div style={{display: 'flex', height: 'auto', width: 'auto', flexDirection: 'row', justifyContent:'center', alignItems: 'center'}}>
             <TextField fullWidth style={{marginBottom: '3vh', borderRadius: '15px', backgroundColor: '#d1d1d1', marginRight: '1vw'}} value={token} onChange={(e)=>{setToken(e.target.value)}} label="Set Bot Token" variant="outlined" color="secondary"/>
             <Button color="success" onClick={()=>{
@@ -156,7 +159,8 @@ const Edit = () => {
                   })
           }} style={{marginBottom: '3vh', }} variant="contained">Start bot</Button>
           </div>
-            :<p style={{textAlign:'center'}}>Or, click {inviteLink==="javascript:void(0)"?<a href={inviteLink} style={{marginBottom: '2vh', color: 'blue', textDecorationLine: 'underline'}} >here</a>:<a href={inviteLink} style={{marginBottom: '2vh', color: 'blue', textDecorationLine: 'underline'}}  target="_blank" rel="noopener noreferrer" >here</a>} to invite your bot to a server.</p>
+          </div>
+            :(inviteLink==="javascript:void(0)"?<></>:<p style={{textAlign:'center'}}>Or, click {<a href={inviteLink} style={{marginBottom: '2vh', color: 'blue', textDecorationLine: 'underline'}}  target="_blank" rel="noopener noreferrer" >here</a>} to invite your bot to a server.</p>)
           }
             {
               authorized===5?
