@@ -1,19 +1,25 @@
 {
   "files": {
     "main.css": "/static/css/main.918d0e63.css",
-    "main.js": "/static/js/main.c2980b0c.js",
+    "main.js": "/static/js/main.b82496f0.js",
     "static/media/splashes.svg": "/static/media/splashes.4b0a162912fbaa7e204c.svg",
     "static/media/green.svg": "/static/media/green.0a63cfe2a9965f6d8fdd.svg",
     "static/media/splash.svg": "/static/media/splash.c4f6bc1ff17129c1ee9c.svg",
     "static/media/splash.png": "/static/media/splash.4d7e1c30a388bf229032.png",
     "static/media/Edit.png": "/static/media/Edit.1141ad3a82e8337660b7.png",
     "static/media/Verify.png": "/static/media/Verify.40d7274d1d8607daf8ba.png",
-    "static/media/features-split-image-03.png": "/static/media/features-split-image-03.b817f6457be2c287cfbf.png",
+    "static/media/Tut5.png": "/static/media/Tut5.fd013fc7a71b9e7309d9.png",
+    "static/media/Tut6.png": "/static/media/Tut6.ee59540663be14e3af1a.png",
+    "static/media/features-split-image-03.png": "/static/media/features-split-image-03.3891eb0dba76297508c2.png",
+    "static/media/Tut2.png": "/static/media/Tut2.7adfdbd2fb6717f743f5.png",
     "static/media/video-placeholder.jpg": "/static/media/video-placeholder.ca40af5667c998a65125.jpg",
+    "static/media/Tut4.png": "/static/media/Tut4.68d7a984d71d2896f7f4.png",
     "static/media/features-split-image-02.png": "/static/media/features-split-image-02.17bd6b99561560ecdc1d.png",
     "static/media/Inky.png": "/static/media/Inky.82ce9810e6bd3f6011f0.png",
+    "static/media/Tut1.png": "/static/media/Tut1.dbd3190222a18c5f8c36.png",
     "static/media/Create.png": "/static/media/Create.648d0def46e4c2797565.png",
     "static/media/features-split-image-01.png": "/static/media/features-split-image-01.88c46ec4b7a8e4745fd3.png",
+    "static/media/Tut3.png": "/static/media/Tut3.959f06dec75aa76d7e43.png",
     "static/media/Construction.png": "/static/media/Construction.bc16927b0281b173128d.png",
     "static/media/blue.svg": "/static/media/blue.464de9940b5b0841e3f2.svg",
     "static/media/signup.png": "/static/media/signup.e4c4df6757c7f9bf6fea.png",
@@ -31,10 +37,10 @@
     "static/media/feature-tile-icon-01.svg": "/static/media/feature-tile-icon-01.e13cef8e30c0472fc8b303cc0801113f.svg",
     "static/media/feature-tile-icon-02.svg": "/static/media/feature-tile-icon-02.469356592c7ce3b1abf53cca85e82fee.svg",
     "main.918d0e63.css.map": "/static/css/main.918d0e63.css.map",
-    "main.c2980b0c.js.map": "/static/js/main.c2980b0c.js.map"
+    "main.b82496f0.js.map": "/static/js/main.b82496f0.js.map"
   },
   "entrypoints": [
     "static/css/main.918d0e63.css",
-    "static/js/main.c2980b0c.js"
+    "static/js/main.b82496f0.js"
   ]
 }
