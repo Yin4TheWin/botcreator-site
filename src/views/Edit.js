@@ -72,6 +72,33 @@ const Edit = () => {
     handleOpen()
   }
 
+  const botPaidTokenUnset=()=>{
+    return (<div>
+        <p style={{textAlign:'center'}}>{<a href='https://yin4thewin.gitbook.io/bot-ink/' style={{marginBottom: '2vh', color: 'blue', textDecorationLine: 'underline'}}  target="_blank" rel="noopener noreferrer" >Need help getting your token?</a>}</p>
+        <div style={{display: 'flex', height: 'auto', width: 'auto', flexDirection: 'row', justifyContent:'center', alignItems: 'center'}}>
+          <TextField fullWidth style={{marginBottom: '3vh', borderRadius: '15px', backgroundColor: '#d1d1d1', marginRight: '1vw'}} value={token} onChange={(e)=>{setToken(e.target.value)}} label="Set Bot Token" variant="outlined" color="secondary"/>
+          <Button color="success" onClick={()=>{
+            axios.post('https://botink.franklinyin.com/bots/birth', {botToken: token, projectName: name, username: uid})
+                .then((res) => {
+                    let projName=name
+                    console.log(res)
+                    set(ref(db, 'users/' + uid + "/" + name), {
+                        token: token,
+                        client: res.data.client,
+                        status: "Active"
+                    }).then(()=>{
+                      onCreateBot(projName, res.data.client)
+                    })
+                    }
+                ).catch(err=>{
+                  console.log(err)
+                  handleFailure(err.response.data.error)
+                })
+        }} style={{marginBottom: '3vh', }} variant="contained">Start bot</Button>
+        </div>
+      </div>)
+  }
+
   React.useEffect(()=>{
     const dbRef = ref(db);
     if(user){
@@ -136,46 +163,24 @@ const Edit = () => {
         {authorized>=3?<div style={{width: 'auto', height: 'auto'}}>
           <p style={{textAlign:'center'}}>Done? <a href="#/dashboard" style={{marginBottom: '2vh', color: 'blue', textDecorationLine: 'underline'}}>Return to your Dashboard.</a></p>
           {authorized==4?
-          <div>
-          <p style={{textAlign:'center'}}>{<a href='https://yin4thewin.gitbook.io/bot-ink/' style={{marginBottom: '2vh', color: 'blue', textDecorationLine: 'underline'}}  target="_blank" rel="noopener noreferrer" >Need help getting your token?</a>}</p>
-          <div style={{display: 'flex', height: 'auto', width: 'auto', flexDirection: 'row', justifyContent:'center', alignItems: 'center'}}>
-            <TextField fullWidth style={{marginBottom: '3vh', borderRadius: '15px', backgroundColor: '#d1d1d1', marginRight: '1vw'}} value={token} onChange={(e)=>{setToken(e.target.value)}} label="Set Bot Token" variant="outlined" color="secondary"/>
-            <Button color="success" onClick={()=>{
-              axios.post('https://discmaker.yinftw.com/bots/birth', {botToken: token, projectName: name, username: uid})
-                  .then((res) => {
-                      let projName=name
-                      console.log(res)
-                      set(ref(db, 'users/' + uid + "/" + name), {
-                          token: token,
-                          client: res.data.client,
-                          status: "Active"
-                      }).then(()=>{
-                        onCreateBot(projName, res.data.client)
-                      })
-                      }
-                  ).catch(err=>{
-                    console.log(err)
-                    handleFailure(err.response.data.error)
-                  })
-          }} style={{marginBottom: '3vh', }} variant="contained">Start bot</Button>
-          </div>
-          </div>
-            :(inviteLink==="javascript:void(0)"?<></>:<p style={{textAlign:'center'}}>Or, click {<a href={inviteLink} style={{marginBottom: '2vh', color: 'blue', textDecorationLine: 'underline'}}  target="_blank" rel="noopener noreferrer" >here</a>} to invite your bot to a server.</p>)
+            botPaidTokenUnset()
+            :
+            (inviteLink==="javascript:void(0)"?<></>:<p style={{textAlign:'center'}}>Or, click {<a href={inviteLink} style={{marginBottom: '2vh', color: 'blue', textDecorationLine: 'underline'}}  target="_blank" rel="noopener noreferrer" >here</a>} to invite your bot to a server.</p>)
           }
             {
               authorized===5?
               <div onClick ={()=>{
                 if(name.length>0){
-                  axios.post('https://discmaker.yinftw.com/pay/subscription-status', {username: uid, projectName: name})
+                  axios.post('https://botink.franklinyin.com/pay/subscription-status', {username: uid, projectName: name})
                   .then(res => {
                       if(res.data.status==='paused'){
-                        axios.post('https://discmaker.yinftw.com/pay/resume-subscription', {uid: uid, projName: name}).then(res=>{
+                        axios.post('https://botink.franklinyin.com/pay/resume-subscription', {uid: uid, projName: name}).then(res=>{
                           handleSuccess("Your billing cycle has been resumed.")
                         }).catch(err=>{
                           handleFailure(err.message)
                         })
                       } else if(res.data.status==='dead'){
-                        axios.post('https://discmaker.yinftw.com/pay/create-checkout-session', {subPrice: 499, subQuantity: 1, email: user.email, metadata: {uid: uid}, projName: name})
+                        axios.post('https://botink.franklinyin.com/pay/create-checkout-session', {subPrice: 499, subQuantity: 1, email: user.email, metadata: {uid: uid}, projName: name})
                         .then(res => {
                           window.location = res.data.url
                           if(res.ok) return res.json()
@@ -199,7 +204,7 @@ const Edit = () => {
               // PAUSE BUTTON
               <div onClick ={()=>{
                 if(name.length>0){
-                  axios.post('https://discmaker.yinftw.com/pay/pause-subscription', {uid:uid, projName: name})
+                  axios.post('https://botink.franklinyin.com/pay/pause-subscription', {uid:uid, projName: name})
                     .then(res => {
                       handleSuccess("Your subscription has been paused! The bot will continue to run until the end of your billing cycle. You may resume any time before then to keep your current billing cycle.")
                       })
@@ -216,7 +221,7 @@ const Edit = () => {
             {/* PAYMENT BUTTON */}
           <div onClick ={()=>{
             if(name.length>0){
-              axios.post('https://discmaker.yinftw.com/pay/manage-subscription', {subPrice: 499, subQuantity: 1, email: user.email, metadata: {uid: uid},
+              axios.post('https://botink.franklinyin.com/pay/manage-subscription', {subPrice: 499, subQuantity: 1, email: user.email, metadata: {uid: uid},
                 name: '{{CUSTOMER_NAME}}', projName: name})
                 .then(res => {
                   window.location = res.data.url

@@ -112,7 +112,7 @@ const Creation = (props) => {
                                 if(snapshot.exists()){
                                     handleFailure("A project already exists under that name!")
                                 } else {
-                                     axios.post('https://discmaker.yinftw.com/pay/create-checkout-session', {subPrice: 499, subQuantity: 1, email: props.user.email, metadata: {uid: props.user.uid},
+                                     axios.post('https://botink.franklinyin.com/pay/create-checkout-session', {subPrice: 499, subQuantity: 1, email: props.user.email, metadata: {uid: props.user.uid},
                                      projName: name.replaceAll(" ", "-")})
                                      .then(res => {
                                          window.location = res.data.url
@@ -139,7 +139,7 @@ const Creation = (props) => {
                         height={128} />
                     </div> 
                     <h2>Edit Your Existing Bots</h2>
-                    <List style={{maxHeight: '100%', width: '100%', overflow: 'auto', paddingRight: '2%'}}>
+                    <List style={{height: '100%', width: '100%', overflow: 'auto', paddingRight: '2%'}}>
                         {bots.map(el=>{
                             return (<ListItem
                             secondaryAction={
